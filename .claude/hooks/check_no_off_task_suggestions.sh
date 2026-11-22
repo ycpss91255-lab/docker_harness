@@ -6,7 +6,7 @@
 # Emits a systemMessage when matched; never blocks. Throttled once per
 # session per matched phrase via TMPDIR marker.
 #
-# Why: refs ycpss91255-docker/docker_harness#109. Closing a technical
+# Why: refs ycpss91255-lab/docker_harness#109. Closing a technical
 # session turn with `Or stop for dinner?` (or similar) adds friction and
 # breaks focus. The user manages their own time. End-of-turn proposals
 # should be concrete technical follow-ups only.

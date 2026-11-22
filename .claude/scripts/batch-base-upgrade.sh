@@ -2,7 +2,7 @@
 # log-allow:script -- emits data-product output (markdown table / next-step hint / Monitor protocol / pass-fail summary) alongside _log_*; per-callsite split deferred until tooling can distinguish.
 
 #
-# Batch-upgrade all downstream repos under ycpss91255-docker to a target
+# Batch-upgrade all downstream repos under ycpss91255-lab to a target
 # template tag. Iterates a fixed repo list, fetches main via HTTPS (works
 # around stale SSH origin tracking), creates chore/base-<tag> branch,
 # runs ./.base/upgrade.sh + ./.base/init.sh, opens a PR per repo.
@@ -39,7 +39,7 @@ source "${SCRIPT_DIR}/lib/log.sh"
 # shellcheck source=lib/roster.sh disable=SC1091
 source "${SCRIPT_DIR}/lib/roster.sh"
 readonly DEFAULT_PR_BODY_TEMPLATE="${SCRIPT_DIR}/batch-base-pr-body.template.md"
-readonly ORG="ycpss91255-docker"
+readonly ORG="ycpss91255-lab"
 
 usage() {
   sed -n '/^# Usage:/,/^$/p' "${BASH_SOURCE[0]}" | sed 's/^# \{0,1\}//' >&2

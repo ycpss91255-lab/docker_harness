@@ -15,7 +15,7 @@
 # agent to dispatch parallel Agents (up to 3) when processing 4+
 # independent repos / files / PRs. The rule fires inconsistently
 # today because there is no enforcement layer. Refs issue
-# ycpss91255-docker/docker_harness#126.
+# ycpss91255-lab/docker_harness#126.
 #
 # Detection patterns (POSIX ERE; matched against the prompt text):
 #   A. <N> <plural-noun> where N >= threshold, plural noun in the bulk

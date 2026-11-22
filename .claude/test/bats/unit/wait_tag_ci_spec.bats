@@ -59,7 +59,7 @@ stub_gh() {
 }
 
 @test "mixed success+skipped runs hit ALL_DONE" {
-  # refs ycpss91255-docker/docker_harness#86 -- gh run list returns lowercase
+  # refs ycpss91255-lab/docker_harness#86 -- gh run list returns lowercase
   # conclusions; treat skipped as success-equivalent for parity with the
   # PR-scoped wait-pr-ci.sh / wait-pr-ci-batch.sh siblings.
   stub_gh '[{"databaseId":1,"name":"release","status":"completed","conclusion":"success"},{"databaseId":2,"name":"build","status":"completed","conclusion":"skipped"}]'

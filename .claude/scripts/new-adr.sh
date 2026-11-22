@@ -17,7 +17,7 @@
 #   1  filesystem failure (mkdir / write)
 #   2  argument or validation error
 #
-# Refs: issue ycpss91255-docker/docker_harness#97.
+# Refs: issue ycpss91255-lab/docker_harness#97.
 
 set -uo pipefail
 

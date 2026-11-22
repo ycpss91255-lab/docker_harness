@@ -18,7 +18,7 @@
 #   - gh[[:space:]]+run[[:space:]]+rerun (re-run — can be PR or
 #     tag-scoped; mention both so the agent picks)
 #
-# Refs: ycpss91255-docker/docker_harness#154
+# Refs: ycpss91255-lab/docker_harness#154
 
 set -uo pipefail
 

@@ -20,7 +20,7 @@
 # the agent to surface skillification candidates (permanent script /
 # slash command / skill follow-up) at task wrap-up. The rule fires
 # inconsistently today because there is no enforcement layer. Refs
-# issue ycpss91255-docker/docker_harness#125.
+# issue ycpss91255-lab/docker_harness#125.
 #
 # Auto-detectable signals (the hook covers these):
 #   A. /tmp/*.sh invocations -- count Bash commands that mention a path

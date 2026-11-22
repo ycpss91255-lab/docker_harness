@@ -35,7 +35,7 @@
 #   2  merge conflict, manual resolution needed
 #   3  pre-condition failure (PR not found, worktree not found)
 #
-# Refs: issue ycpss91255-docker/docker_harness#221 (supersedes the
+# Refs: issue ycpss91255-lab/docker_harness#221 (supersedes the
 #       rebase+force-push flow of #87).
 
 set -uo pipefail

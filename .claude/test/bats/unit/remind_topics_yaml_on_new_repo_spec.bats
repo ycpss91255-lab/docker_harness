@@ -2,13 +2,13 @@
 
 load '../lib/test_helper'
 
-@test "fires on gh repo create ycpss91255-docker/<name>" {
-  run "$(hook remind_topics_yaml_on_new_repo.sh)" <<< '{"tool_input":{"command":"gh repo create ycpss91255-docker/foo --public"}}'
+@test "fires on gh repo create ycpss91255-lab/<name>" {
+  run "$(hook remind_topics_yaml_on_new_repo.sh)" <<< '{"tool_input":{"command":"gh repo create ycpss91255-lab/foo --public"}}'
   assert_message_contains "topics.yaml"
 }
 
 @test "fires regardless of gh repo create flag order" {
-  run "$(hook remind_topics_yaml_on_new_repo.sh)" <<< '{"tool_input":{"command":"gh repo create --public ycpss91255-docker/bar"}}'
+  run "$(hook remind_topics_yaml_on_new_repo.sh)" <<< '{"tool_input":{"command":"gh repo create --public ycpss91255-lab/bar"}}'
   assert_message_contains "topics.yaml"
 }
 
@@ -18,7 +18,7 @@ load '../lib/test_helper'
 }
 
 @test "silent on gh repo view (not create)" {
-  run "$(hook remind_topics_yaml_on_new_repo.sh)" <<< '{"tool_input":{"command":"gh repo view ycpss91255-docker/foo"}}'
+  run "$(hook remind_topics_yaml_on_new_repo.sh)" <<< '{"tool_input":{"command":"gh repo view ycpss91255-lab/foo"}}'
   assert_silent
 }
 

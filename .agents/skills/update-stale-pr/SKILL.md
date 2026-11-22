@@ -62,13 +62,13 @@ handles correctly.
 
 ```
 # wait-pr-ci.sh notified ALL_DONE; gh pr merge denied with "branch is not up to date"
-.claude/scripts/update-stale-pr.sh 105 --repo ycpss91255-docker/docker_harness
+.claude/scripts/update-stale-pr.sh 105 --repo ycpss91255-lab/docker_harness
 
 # Output:
 #   updating PR #105 (fix/wait-pr-ci-skipped) by merging origin/main in <workspace>/worktree/docker_harness-105
 #   ... fetch / merge progress ...
 #   PR #105 merge-updated + pushed. Re-arm Monitor:
-#     .claude/scripts/wait-pr-ci.sh --repo ycpss91255-docker/docker_harness --prs 105
+#     .claude/scripts/wait-pr-ci.sh --repo ycpss91255-lab/docker_harness --prs 105
 ```
 
 After the script prints the re-arm hint, start a fresh `Monitor`
@@ -77,7 +77,7 @@ on the new head:
 ```
 Monitor(
   description: "PR #105 CI (updated)",
-  command: ".claude/scripts/wait-pr-ci.sh --repo ycpss91255-docker/docker_harness --prs 105 [--check-filter <expr>]",
+  command: ".claude/scripts/wait-pr-ci.sh --repo ycpss91255-lab/docker_harness --prs 105 [--check-filter <expr>]",
   timeout_ms: 1800000,
   persistent: false,
 )

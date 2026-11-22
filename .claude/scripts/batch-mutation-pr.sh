@@ -66,7 +66,7 @@ source "${SCRIPT_DIR}/lib/log.sh"
 # engine drifting away from the fanout the way four copies of the list did.
 # shellcheck source=lib/roster.sh disable=SC1091
 source "${SCRIPT_DIR}/lib/roster.sh"
-readonly ORG="ycpss91255-docker"
+readonly ORG="ycpss91255-lab"
 
 # Mutation exit-code protocol.
 readonly MUT_CHANGED=0

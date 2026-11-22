@@ -31,7 +31,7 @@
 #   serial-merge.sh [options] <owner/repo> <pr1> <pr2> ...
 #
 # `<owner/repo>` is a SINGLE repo. A short name (no `/`) is prefixed
-# with the default owner `ycpss91255-docker` (mirrors
+# with the default owner `ycpss91255-lab` (mirrors
 # batch-pr-merge.sh). Every `<prN>` is landed against that one repo, in
 # the given argument order.
 #
@@ -64,7 +64,7 @@
 set -euo pipefail
 
 _SM_SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)"
-readonly DEFAULT_OWNER='ycpss91255-docker'
+readonly DEFAULT_OWNER='ycpss91255-lab'
 readonly DELEGATE="${SERIAL_MERGE_DELEGATE:-${_SM_SCRIPT_DIR}/auto-merge-on-green.sh}"
 
 usage() {

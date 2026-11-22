@@ -27,7 +27,7 @@ goes in an ADR. New domain knowledge should never land in `CLAUDE.md`
 `.env.generated` 是唯一「我們的卻帶後綴」的情況：它只用來填
 `compose.yaml` 的 `${VAR}`，不會進容器（見 ADR-00000003 與 §3），後綴
 標的是類別而非歸屬。此規則的理由、被否決的替代方案與遷移程序記在
-`ycpss91255-docker/base#868`。
+`ycpss91255-lab/base#868`。
 
 - 繁體中文 README：**`README.zh-TW.md`**（連字號，非底線）
 - 英文 README：`README.md`
@@ -86,9 +86,9 @@ docker/
 │   ├── osrf_ros_noetic/      # superseded by env/ros_distro (noetic-desktop-full entry)
 │   ├── osrf_ros_kinetic/     # superseded by env/ros_distro (kinetic-desktop-full entry)
 │   └── osrf_ros2_humble/     # superseded by env/ros2_distro (humble-desktop-full entry)
-├── template/                 # 本地 checkout of ycpss91255-docker/base
+├── template/                 # 本地 checkout of ycpss91255-lab/base
 ├── multi_run/                # 多容器啟動工具 (獨立 repo)
-├── org-profile/              # 本地 checkout of ycpss91255-docker/.github (org 首頁)
+├── org-profile/              # 本地 checkout of ycpss91255-lab/.github (org 首頁)
 ├── .github/workflows/        # docker_harness 自身 CI (test.yaml)
 └── .claude/                  # Claude Code 設定
     ├── commands/             # 自訂 slash commands
@@ -96,7 +96,7 @@ docker/
     │   ├── batch-pr.md                # /batch-pr — 批次跨 repo PR（通用）
     │   ├── batch-base-upgrade.md  # /batch-base-upgrade — 批次升級下游 .base/ subtree（active list 目前 = env/ros_distro + env/ros2_distro,其餘 11 個 repo 在 DEFAULT_REPOS 內 comment-out 待 follow-up;名稱於 #146 由 batch-template-upgrade 改名）
     │   ├── doc-sync.md                # /doc-sync — 變更完成 checklist 對齊檢查
-    │   ├── issue-check.md             # /issue-check — 掃 ycpss91255-docker org 未處理的 open issue
+    │   ├── issue-check.md             # /issue-check — 掃 ycpss91255-lab org 未處理的 open issue
     │   ├── issue-fix.md               # /issue-fix <repo> [<issue_num>|all] [--dry-run] [--limit N] — auto-fix 一個或全部 open issue（合理才修，不合理留 comment）
     │   ├── new-repo.md                # /new-repo — 建立新 Docker repo
     │   ├── pr.md                      # /pr — Bug fix / 新功能 PR 流程
@@ -106,7 +106,7 @@ docker/
     │   └── verify.md                  # /verify — 變更完成 checklist 一次跑完 (shellcheck/hadolint/bats/tree/test-md/doc-scan/diff-stats)
     ├── scripts/             # 永久 helper script（被 commands / skills 呼叫）
     │   ├── batch-base-upgrade.sh            # /batch-base-upgrade 的實作（renamed from batch-template-upgrade.sh in #146）
-    │   ├── batch-rename-template-to-base.sh # 一次性 #263 Phase 6 fanout：13 下游 git rm template/ + git subtree add --prefix=.base ycpss91255-docker/base.git vX.Y.Z + Dockerfile/main.yaml/README sed
+    │   ├── batch-rename-template-to-base.sh # 一次性 #263 Phase 6 fanout：13 下游 git rm template/ + git subtree add --prefix=.base ycpss91255-lab/base.git vX.Y.Z + Dockerfile/main.yaml/README sed
     │   ├── batch-sensor-app-v0.27.sh        # 一次性 #263 sensor-app 5 repo fanout（realsense_humble/noetic、sick_humble/noetic、urg_node_noetic）：rename + Dockerfile 對齊 v0.27 layered config + SETUP_DIR (#254/#261)
     │   ├── batch-base-pr-body.template.md   # 對應 PR body 模板（envsubst 格式;renamed from batch-template-pr-body.template.md in #146）
     │   ├── batch-gitignore-fix.sh           # 一次性 .gitignore `.claude/` -> `.claude` 17 repo fanout（PR #21）
@@ -151,7 +151,7 @@ docker/
     │   ├── unpublished-worktrees.sh          # sweep a worktree root for branches holding work that reached nobody: commits ahead of origin/main AND no PR in ANY state (--squash means merged branches are never ancestors, so ahead-of-main alone reports every landed worktree), gated on quiet period + clean tree; each worktree resolved against its OWN origin (no --repo flag), exact-line match against a cached PR window with every miss re-asked per branch (--limit truncates silently), --watch dedups on repo+branch (directories are recycled) and rebuilds its seen set each sweep so a re-entry is reported again; the default root is the directory a linked worktree sits in (../worktree relative to the repo root otherwise) and is resolved only when --root is absent; anything that leaves the sweep unanswered (missing root, no checkout to derive one from, a PR list gh refused) is exit 2, never the all-clear, refs base#1003
     │   └── lib/
     │       ├── checkpoint.sh                  # /tmp checkpoint protocol helper — write_checkpoint + is_acked,Tier 2 E2 hook 共享 deny/ack 契約,refs ADR-00000002 / #117
-    │       ├── log.sh                          # OTel-aligned 5-level JSON logger; mirror of ycpss91255-docker/base@v0.37.0 (script/docker/lib/log.sh),refs base#423 / base#438 / #148
+    │       ├── log.sh                          # OTel-aligned 5-level JSON logger; mirror of ycpss91255-lab/base@v0.37.0 (script/docker/lib/log.sh),refs base#423 / base#438 / #148
     │       ├── log-events.txt                 # registered body enum for _log_*; unregistered body 觸發 fatal exit
     │       ├── log.lnav-format.json           # lnav format file for the JSON logger output
     │       ├── roster.tsv                      # THE 一份 org repo 名冊(取代先前散在 4 支 script + pr.md 的複本):欄位 repo/path/fanout(active|parked|n-a)/mutation/settings/check/note;fanout 欄同時餵 batch-base-upgrade(開 PR)與 check-template-versions(驗證),所以兩邊不可能再看不同集合,refs #272
@@ -194,7 +194,7 @@ docker/
     │   ├── enforce_local_full_ci_before_pr.sh # gh pr create/ready 前 BLOCK：HEAD 無 local-CI marker(.claude/state/local-ci-pass/<sha>.ok,由 .claude/test/ci.sh test 綠時寫)且非「綠後只動 doc」則 deny;LOCAL_CI_ACK=<sha> 可 override(refs #176)
     │   ├── enforce_scripts_tracked_before_pr.sh # gh pr create/ready 前 BLOCK：.claude/scripts/ 下(含 lib/)還有 untracked *.sh 就 deny 並列出檔名 — enforce_batch_via_script 只管「產生」不管「善後」,15 個 fanout 一次性腳本累積成 local lint 長紅的根因;放 PR-open 而非 ci.sh check,因為腳本寫到一半未 commit 是合法中間狀態(refs #282)
     │   ├── check_prefer_dot_sh.sh       # docker build/run/exec/stop/compose 前：cwd 有對應 .sh wrapper 則 deny,沒有則 ask
-    │   ├── remind_topics_yaml_on_new_repo.sh # gh repo create ycpss91255-docker/* 前提醒去 .github topics.yaml 加 repos.* 條目
+    │   ├── remind_topics_yaml_on_new_repo.sh # gh repo create ycpss91255-lab/* 前提醒去 .github topics.yaml 加 repos.* 條目
     │   ├── auto_clean_worktree_leak.sh  # PreToolUse Bash：git pull / git checkout origin/* / git merge origin/* 前掃 main checkout 非 whitelist M(`.claude/instincts.yaml` + `.claude/memory/**`)→ 寫 cleaned event 到 ~/.claude/log/worktree-leak-events.jsonl + git checkout HEAD -- <files> 還原後放行；refs #167
     │   ├── check_readme_framework.sh    # Edit/Write 後掃下游 repo README.md (+ 3 翻譯) 是否符合 .base/README.md 框架(badge / 4 語言 link / TL;DR H2 / Smoke Tests link / 無 stale 路徑) — non-blocking warning
     │   ├── check_no_stale_template_refs.sh # Edit/Write 後掃 .base/ 下 .sh/Makefile/Dockerfile 是否殘留 template/<path> 引用(rename 後遺漏,refs base#282)
@@ -491,7 +491,7 @@ PreToolUse hook BLOCKs raw `git tag v*` / `git push.*v[0-9]`，迫使 caller
 .claude/scripts/release-tag.sh v1.3.0-rc1 -m "v1.3.0-rc1: ..."
 
 # 2. 等 CI 全部通過（wait-tag-ci skill）
-.claude/scripts/wait-tag-ci.sh --repo ycpss91255-docker/<repo> --branch v1.3.0-rc1
+.claude/scripts/wait-tag-ci.sh --repo ycpss91255-lab/<repo> --branch v1.3.0-rc1
 
 # 3. RC 通過 → 打正式 tag
 .claude/scripts/release-tag.sh v1.3.0 -m "v1.3.0: ..."
@@ -572,7 +572,7 @@ AI Agent 容器透過 `devel-gpu` service 支援 NVIDIA GPU（CPU 為預設）�
 
 ## 10. Branch protection (per-repo `required_status_checks`)
 
-所有 `ycpss91255-docker` 組織下的 repo，main branch 一律啟用 branch
+所有 `ycpss91255-lab` 組織下的 repo，main branch 一律啟用 branch
 protection，**包含 admin**，任何情境都不允許直接 push：
 
 | 設定項 | 值 | 說明 |
@@ -721,7 +721,7 @@ pattern**，改用替代寫法可以根除大量無謂的 user prompt：
 | Monitor 內嵌 20+ 行 bash with `${var%:*}` 或 `<<<"$s"` | `Contains simple_expansion` / `Unhandled node type: string` | 同上，body 抽 script。PR CI 輪詢用 `.claude/scripts/wait-pr-ci.sh`；tag/branch CI 輪詢用 `.claude/scripts/wait-tag-ci.sh`（見 `.claude/skills/wait-pr-ci/SKILL.md`） |
 | `cd path && git ...` | 內建 cd+git 安全警告（與上述 parser 無關） | **用 `git -C path <subcmd>`** 取代 |
 | `(cd <repo>/worktree path && ./build.sh test)` 或 `bash -c "cd <dir> && ./build.sh ..."` | parser 只看 top-level token,subshell 是 `(`、`bash -c` 是 `bash`、都不命中 `excludedCommands: "./build.sh *"`,sandbox 套上去後 docker.sock 連不上 → `permission denied while trying to connect to the docker API at unix:///var/run/docker.sock` | **用 `./build.sh -C <dir> ...`**（同樣支援 `run.sh` / `exec.sh` / `stop.sh`,從 template v0.22.0 起,refs #53）。長形式 `--chdir`,行為對齊 `git -C` / `make -C`。Top-level token 留在 `./build.sh ...`,sandbox bypass 正常運作 |
-| `gh pr merge N --repo X` 從非該 repo cwd | 內建 state-changing safety 提示（不可 bypass，與 parser、allowlist 都無關） | **接受 1-click 提示即可** — 這是合理的安全檢查，且 `docker` monorepo 裡沒有 `ycpss91255-docker/base` 的獨立 checkout（只是 git subtree），無法 cd 進去規避；`-R X` 短形式 / `(cd path && ...)` 子 shell 都不能繞 |
+| `gh pr merge N --repo X` 從非該 repo cwd | 內建 state-changing safety 提示（不可 bypass，與 parser、allowlist 都無關） | **接受 1-click 提示即可** — 這是合理的安全檢查，且 `docker` monorepo 裡沒有 `ycpss91255-lab/base` 的獨立 checkout（只是 git subtree），無法 cd 進去規避；`-R X` 短形式 / `(cd path && ...)` 子 shell 都不能繞 |
 | `[[ a != b ]]` 在 Monitor 內 | Monitor eval wrapper escape `!` 成 `\!` | **用 `case` pattern**（見 `.claude/skills/wait-pr-ci/SKILL.md`） |
 | `until ... $(cat <pidfile>) ...; do sleep N; done` 等 background task | `Contains command_substitution` | **用 `Bash` 的 `run_in_background`** — runtime 完成時自動通知，不用 poll。等 GitHub CI 用 `wait-pr-ci.sh` / `wait-tag-ci.sh`；等 local 長 process 用 `run_in_background` 起 task 然後做別的事 |
 | `docker run ... bash -c '<長 inline 字串>'` 或 `docker compose ... bash -c '...'`（多行 shell logic 包在引號裡） | `Unhandled node type: string` | **抽成 script** — 用 Write 寫成 `/tmp/<name>.sh`，再 `docker run -v "$PWD":/source ... bash /source/<rel-path>/<name>.sh`；或抽 permanent `.claude/scripts/<name>.sh` 接 atomic flags（如 `run-bats-in-compose.sh --suite all --grep '^not ok'`），Claude parser 只看到 atomic args 不 hit string node。長 quoted body 永遠抽成檔案，不要 inline |

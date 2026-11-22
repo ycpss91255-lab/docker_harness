@@ -46,5 +46,5 @@ load '../lib/test_helper'
   run "$(script fix-dockerfile-lint-lib.sh)" --branch chore/base-v0.28.2 --org other-org --repos foo --dry-run
   assert_success
   assert_output --partial '"org":"other-org"'
-  refute_output --partial '"org":"ycpss91255-docker"'
+  refute_output --partial '"org":"ycpss91255-lab"'
 }

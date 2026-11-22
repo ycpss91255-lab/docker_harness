@@ -26,7 +26,7 @@
 #   batch-open-archive-rename-issues.sh [options]
 #
 # Options:
-#   --owner <OWNER>      Default owner (default: ycpss91255-docker)
+#   --owner <OWNER>      Default owner (default: ycpss91255-lab)
 #   --refs <URL-or-#N>   Cross-ref string appended to each body's "refs"
 #                        line (e.g. https://github.com/.../pull/86 or #86)
 #   --only <slugs,...>   Limit to listed basenames (e.g. ai_agent,sick_humble,
@@ -46,7 +46,7 @@ _BOARI_SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && p
 # shellcheck source=lib/log.sh disable=SC1091
 source "${_BOARI_SCRIPT_DIR}/lib/log.sh"
 
-readonly DEFAULT_OWNER='ycpss91255-docker'
+readonly DEFAULT_OWNER='ycpss91255-lab'
 readonly TMP_DIR="${TMPDIR:-/tmp}"
 
 # Archive entries: <repo_basename>|<reason_short>
@@ -177,7 +177,7 @@ active \`DEFAULT_REPOS\` arrays:
 ## Proposal
 
 - Step 1: Subtree migration PR (\`git rm template/\` +
-  \`git subtree add --prefix=.base ycpss91255-docker/base.git vX.Y.Z\` +
+  \`git subtree add --prefix=.base ycpss91255-lab/base.git vX.Y.Z\` +
   Dockerfile / \`.github/workflows/main.yaml\` / README path sed).
 - Step 2: GitHub repo rename \`${old}\` -> \`${new}\` (Settings ->
   General -> Repository name). Existing clones / forks redirect via the

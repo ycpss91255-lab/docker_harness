@@ -3,7 +3,7 @@
 
 # One-shot batch fanout: fresh-add Apache 2.0 LICENSE + CI/License
 # badges to the 13 active downstream container repos under
-# ycpss91255-docker. Tracks org-wide license alignment recorded in
+# ycpss91255-lab. Tracks org-wide license alignment recorded in
 # 17 sister issues (refs docker_harness#52, template#246).
 #
 # What it does per repo:
@@ -30,7 +30,7 @@
 
 set -euo pipefail
 
-readonly ORG="ycpss91255-docker"
+readonly ORG="ycpss91255-lab"
 readonly LICENSE_SOURCE="/tmp/apache-2.0.txt"
 readonly BRANCH="chore/license-apache-2"
 readonly TITLE="chore: add Apache 2.0 LICENSE + CI/License badges"

@@ -2,7 +2,7 @@
 # log-allow:script -- per-repo delta output is the data product; control-flow errors still route through _log_*.
 #
 # sync-org-repo-settings.sh -- Sync GitHub repo settings across base-aligned
-# repos in the ycpss91255-docker org (base + .base subtree consumers + adjacent
+# repos in the ycpss91255-lab org (base + .base subtree consumers + adjacent
 # tooling). One-off projects that don't follow the base workflow (e.g.
 # github_runner per ADR-0012, demo-repository) are intentionally out of scope.
 #
@@ -44,7 +44,7 @@ source "${SCRIPT_DIR}/lib/log.sh"
 source "${SCRIPT_DIR}/lib/roster.sh"
 
 SERVICE="sync-org-repo-settings"
-OWNER="ycpss91255-docker"
+OWNER="ycpss91255-lab"
 DRY_RUN=0
 SCOPE_REPO=""
 

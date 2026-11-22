@@ -22,7 +22,7 @@
 #
 # Options:
 #   --owner <OWNER>           Default owner for short `<repo>` form
-#                             (default: ycpss91255-docker)
+#                             (default: ycpss91255-lab)
 #   --check-filter <jq-expr>  Global jq inner expression filtering
 #                             .statusCheckRollup[]?. Default:
 #                             '.name=="test" or (.name|startswith("Integration"))'
@@ -59,7 +59,7 @@
 #   --max-iterations <N>      Iteration cap (default 0 = unlimited; for tests)
 #   -h, --help                Show this help
 #
-# Stale-rollup guards (refs ycpss91255-docker/docker_harness#60). Same
+# Stale-rollup guards (refs ycpss91255-lab/docker_harness#60). Same
 # semantics as wait-pr-ci.sh: a watch-start completedAt comparison
 # demotes carry-over rollup results to "pending" instead of "all-pass",
 # and a per-pair `headRefOid` change check emits one
@@ -85,7 +85,7 @@ _WPCB_SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pw
 source "${_WPCB_SCRIPT_DIR}/lib/log.sh"
 
 readonly DEFAULT_FILTER='.name=="test" or (.name|startswith("Integration"))'
-readonly DEFAULT_OWNER='ycpss91255-docker'
+readonly DEFAULT_OWNER='ycpss91255-lab'
 
 # _emit_event <exit_reason> <iter> <watch_start> <head_moves> <norm_pair...>
 #

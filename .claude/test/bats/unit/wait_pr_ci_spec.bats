@@ -95,7 +95,7 @@ STUB_EOF
 }
 
 @test "all-pass + CONFLICTING mergeable exits 1 with update-stale-pr hint" {
-  # refs ycpss91255-docker/docker_harness#87 / #221 -- when checks pass but
+  # refs ycpss91255-lab/docker_harness#87 / #221 -- when checks pass but
   # mergeable=CONFLICTING, the resolution is to merge origin/main into the
   # branch (no rebase). Surface as FAIL with the update-stale-pr.sh
   # canonical incantation rather than looping forever on CONFLICTING.
@@ -107,7 +107,7 @@ STUB_EOF
 }
 
 @test "mixed SUCCESS+SKIPPED rollup hits ALL_DONE" {
-  # refs ycpss91255-docker/docker_harness#86 -- SKIPPED is a legitimate
+  # refs ycpss91255-lab/docker_harness#86 -- SKIPPED is a legitimate
   # terminal state (job-level if: evaluated false). Treated as
   # success-equivalent so the doc-only short-circuit pattern (base#317)
   # does not hang forever.
@@ -224,7 +224,7 @@ STUB_EOF
   assert_output --partial "--min-checks"
 }
 
-# Stale-rollup guards (refs ycpss91255-docker/docker_harness#60).
+# Stale-rollup guards (refs ycpss91255-lab/docker_harness#60).
 
 @test "all-pass with all completedAt predating watch start → pending" {
   # Force-push scenario: every matching check is from a prior run.
@@ -283,7 +283,7 @@ STUB_EOF
 }
 
 @test "state=MERGED with mergeable=UNKNOWN exits 0 with ALL_DONE (auto-merge race)" {
-  # refs ycpss91255-docker/docker_harness#113. After `gh pr merge --auto`
+  # refs ycpss91255-lab/docker_harness#113. After `gh pr merge --auto`
   # completes, GitHub stops recomputing `mergeable`, leaving it stuck at
   # UNKNOWN. .state=MERGED is authoritative: short-circuit to ALL_DONE
   # without waiting for `mergeable=MERGEABLE`.

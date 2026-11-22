@@ -73,11 +73,11 @@ Monitor(
 )
 ```
 
-Positional pairs use short form (`ai_agent:28` — owner defaults to `ycpss91255-docker`, override with `--owner`) or full form (`other-org/repo:5`). Output line per pair:
+Positional pairs use short form (`ai_agent:28` — owner defaults to `ycpss91255-lab`, override with `--owner`) or full form (`other-org/repo:5`). Output line per pair:
 
 ```
-ycpss91255-docker/ai_agent#28: checks=all-pass mergeable=MERGEABLE
-ycpss91255-docker/claude_code#27: checks=pending mergeable=MERGEABLE
+ycpss91255-lab/ai_agent#28: checks=all-pass mergeable=MERGEABLE
+ycpss91255-lab/claude_code#27: checks=pending mergeable=MERGEABLE
 ...
 ---
 ```
@@ -153,7 +153,7 @@ For `wait-pr-ci-batch.sh`, `--min-checks` accepts the same two forms as `--check
 
 ## Stale-rollup guards (force-push race)
 
-Two additional guards (refs ycpss91255-docker/docker_harness#60) catch the case where the script is launched immediately after a `git push --force-with-lease`. GitHub takes 10-60 seconds to retrigger CI on the new head; during that window the PR rollup either still shows the old head's results, returns empty, or shows the new head with only some checks queued. Without these guards, the "still shows old head" sub-case results in immediate false ALL_DONE because the previous run's `ci-summary=pass` matches the success filter.
+Two additional guards (refs ycpss91255-lab/docker_harness#60) catch the case where the script is launched immediately after a `git push --force-with-lease`. GitHub takes 10-60 seconds to retrigger CI on the new head; during that window the PR rollup either still shows the old head's results, returns empty, or shows the new head with only some checks queued. Without these guards, the "still shows old head" sub-case results in immediate false ALL_DONE because the previous run's `ci-summary=pass` matches the success filter.
 
 1. **Watch-start completedAt guard** — captured at script start. Inside the `all(.conclusion == "SUCCESS")` branch, if every filter-matched check has `completedAt` set AND every one of those values predates the watch start time, the rollup is carry-over from a prior head. Demoted to `pending` rather than declared `all-pass`. Backwards-compatible: only fires when every matching check has `completedAt` (real GitHub API always populates it; existing test stubs without the field keep working).
 

@@ -142,7 +142,7 @@ run_hook() {
 }
 
 @test "denies gh release create with --repo flag" {
-  run_hook "gh release create v1.3.0 --repo ycpss91255-docker/base --notes ok"
+  run_hook "gh release create v1.3.0 --repo ycpss91255-lab/base --notes ok"
   assert_permission_decision "deny"
 }
 

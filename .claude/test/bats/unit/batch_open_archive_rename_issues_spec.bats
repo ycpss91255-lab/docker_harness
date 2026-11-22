@@ -97,22 +97,22 @@ EOF
   assert_success
 
   # 7 archive entries
-  assert_output --partial "ycpss91255-docker/ai_agent"
-  assert_output --partial "ycpss91255-docker/claude_code"
-  assert_output --partial "ycpss91255-docker/codex_cli"
-  assert_output --partial "ycpss91255-docker/gemini_cli"
-  assert_output --partial "ycpss91255-docker/ros1_bridge"
-  assert_output --partial "ycpss91255-docker/sick_humble"
-  assert_output --partial "ycpss91255-docker/sick_noetic"
+  assert_output --partial "ycpss91255-lab/ai_agent"
+  assert_output --partial "ycpss91255-lab/claude_code"
+  assert_output --partial "ycpss91255-lab/codex_cli"
+  assert_output --partial "ycpss91255-lab/gemini_cli"
+  assert_output --partial "ycpss91255-lab/ros1_bridge"
+  assert_output --partial "ycpss91255-lab/sick_humble"
+  assert_output --partial "ycpss91255-lab/sick_noetic"
 
   # 4 rename entries (old repo is the GitHub target; new is in title)
-  assert_output --partial "ycpss91255-docker/urg_node_humble"
+  assert_output --partial "ycpss91255-lab/urg_node_humble"
   assert_output --partial "urg_node_humble -> urg_node_ros2"
-  assert_output --partial "ycpss91255-docker/urg_node_noetic"
+  assert_output --partial "ycpss91255-lab/urg_node_noetic"
   assert_output --partial "urg_node_noetic -> urg_node_ros1"
-  assert_output --partial "ycpss91255-docker/realsense_humble"
+  assert_output --partial "ycpss91255-lab/realsense_humble"
   assert_output --partial "realsense_humble -> realsense_ros2"
-  assert_output --partial "ycpss91255-docker/realsense_noetic"
+  assert_output --partial "ycpss91255-lab/realsense_noetic"
   assert_output --partial "realsense_noetic -> realsense_ros1"
 
   # 11 created in summary
@@ -233,7 +233,7 @@ EOF
   assert_output --partial "issue"
   assert_output --partial "create"
   assert_output --partial "-R"
-  assert_output --partial "ycpss91255-docker/ai_agent"
+  assert_output --partial "ycpss91255-lab/ai_agent"
   assert_output --partial "--title"
   assert_output --partial "--body-file"
   # The body-file path lives under our TMPDIR
@@ -247,7 +247,7 @@ EOF
   assert_success
   run cat "${GH_STUB_DIR}/calls.log"
   assert_output --partial "my-org/sick_noetic"
-  refute_output --partial "ycpss91255-docker/sick_noetic"
+  refute_output --partial "ycpss91255-lab/sick_noetic"
 }
 
 # ---- idempotency: skip when title already exists ----
@@ -258,7 +258,7 @@ EOF
   run "$(script batch-open-archive-rename-issues.sh)" --only ai_agent
   assert_success
   assert_output --partial '"body":"issue_skipped"'
-  assert_output --partial '"owner_repo":"ycpss91255-docker/ai_agent"'
+  assert_output --partial '"owner_repo":"ycpss91255-lab/ai_agent"'
   assert_output --partial '"skipped":"1"'
   assert_output --partial '"created":"0"'
 }

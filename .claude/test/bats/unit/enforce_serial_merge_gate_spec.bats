@@ -66,7 +66,7 @@ run_hook() {
 
 @test "silent on first arm when repo has no already-armed PR" {
   export ARMED=""
-  run_hook "gh pr merge 775 --repo ycpss91255-docker/base --auto --squash"
+  run_hook "gh pr merge 775 --repo ycpss91255-lab/base --auto --squash"
   assert_silent
 }
 
@@ -74,28 +74,28 @@ run_hook() {
 
 @test "denies second same-repo arm with a data-rich message" {
   export ARMED="773 774"
-  run_hook "gh pr merge 775 --repo ycpss91255-docker/base --auto --squash"
+  run_hook "gh pr merge 775 --repo ycpss91255-lab/base --auto --squash"
   assert_permission_decision "deny"
   local reason
   reason="$(echo "${output}" | jq -r '.hookSpecificOutput.permissionDecisionReason // empty')"
-  [[ "${reason}" == *"ycpss91255-docker/base"* ]] || { echo "want repo, got: ${reason}"; return 1; }
+  [[ "${reason}" == *"ycpss91255-lab/base"* ]] || { echo "want repo, got: ${reason}"; return 1; }
   [[ "${reason}" == *"#773"* && "${reason}" == *"#774"* ]] || { echo "want armed list, got: ${reason}"; return 1; }
   [[ "${reason}" == *"775"* ]] || { echo "want this-pr, got: ${reason}"; return 1; }
 }
 
 @test "deny message contains ready-to-paste serial-merge.sh command" {
   export ARMED="773 774"
-  run_hook "gh pr merge 775 --repo ycpss91255-docker/base --auto --squash"
+  run_hook "gh pr merge 775 --repo ycpss91255-lab/base --auto --squash"
   assert_permission_decision "deny"
   local reason
   reason="$(echo "${output}" | jq -r '.hookSpecificOutput.permissionDecisionReason // empty')"
-  [[ "${reason}" == *"serial-merge.sh ycpss91255-docker/base 773 774 775"* ]] || {
+  [[ "${reason}" == *"serial-merge.sh ycpss91255-lab/base 773 774 775"* ]] || {
     echo "want ready-to-paste serial-merge command, got: ${reason}"; return 1; }
 }
 
 @test "deny writes a checkpoint markdown" {
   export ARMED="773"
-  run_hook "gh pr merge 775 --repo ycpss91255-docker/base --auto --squash"
+  run_hook "gh pr merge 775 --repo ycpss91255-lab/base --auto --squash"
   assert_permission_decision "deny"
   local md_count
   md_count="$(find "${TMPDIR}" -maxdepth 1 -name 'claude-checkpoint-enforce-serial-merge-gate-*.md' | wc -l)"
@@ -110,14 +110,14 @@ run_hook() {
   assert_permission_decision "deny"
   local reason
   reason="$(echo "${output}" | jq -r '.hookSpecificOutput.permissionDecisionReason // empty')"
-  [[ "${reason}" == *"ycpss91255-docker/base"* ]] || { echo "want expanded owner, got: ${reason}"; return 1; }
+  [[ "${reason}" == *"ycpss91255-lab/base"* ]] || { echo "want expanded owner, got: ${reason}"; return 1; }
 }
 
 # ---- idempotent re-arm: exclude the PR being armed ----
 
 @test "excludes the PR being armed from the armed count (idempotent re-arm)" {
   export ARMED="775"
-  run_hook "gh pr merge 775 --repo ycpss91255-docker/base --auto --squash"
+  run_hook "gh pr merge 775 --repo ycpss91255-lab/base --auto --squash"
   assert_silent
 }
 
@@ -125,7 +125,7 @@ run_hook() {
 
 @test "allows same command after ack file exists" {
   export ARMED="773 774"
-  local cmd="gh pr merge 775 --repo ycpss91255-docker/base --auto --squash"
+  local cmd="gh pr merge 775 --repo ycpss91255-lab/base --auto --squash"
   local ack
   ack="$(ack_path_for "${cmd}")"
   : > "${ack}"
@@ -139,9 +139,9 @@ run_hook() {
 @test "ack for a different command does NOT bypass deny" {
   export ARMED="773 774"
   local other_ack
-  other_ack="$(ack_path_for "gh pr merge 999 --repo ycpss91255-docker/base --auto")"
+  other_ack="$(ack_path_for "gh pr merge 999 --repo ycpss91255-lab/base --auto")"
   : > "${other_ack}"
-  run_hook "gh pr merge 775 --repo ycpss91255-docker/base --auto --squash"
+  run_hook "gh pr merge 775 --repo ycpss91255-lab/base --auto --squash"
   assert_permission_decision "deny"
 }
 
@@ -150,13 +150,13 @@ run_hook() {
 @test "SERIAL_MERGE=1 env bypasses the gate" {
   export ARMED="773 774"
   export SERIAL_MERGE=1
-  run_hook "gh pr merge 775 --repo ycpss91255-docker/base --auto --squash"
+  run_hook "gh pr merge 775 --repo ycpss91255-lab/base --auto --squash"
   assert_silent
 }
 
 @test "SERIAL_MERGE=1 inline command prefix bypasses the gate" {
   export ARMED="773 774"
-  run_hook "SERIAL_MERGE=1 gh pr merge 775 --repo ycpss91255-docker/base --auto --squash"
+  run_hook "SERIAL_MERGE=1 gh pr merge 775 --repo ycpss91255-lab/base --auto --squash"
   assert_silent
 }
 
@@ -164,7 +164,7 @@ run_hook() {
 
 @test "silent on non-auto gh pr merge (not an arm)" {
   export ARMED="773 774"
-  run_hook "gh pr merge 775 --repo ycpss91255-docker/base --squash"
+  run_hook "gh pr merge 775 --repo ycpss91255-lab/base --squash"
   assert_silent
 }
 
@@ -176,7 +176,7 @@ run_hook() {
 
 @test "silent on gh pr view (read-only)" {
   export ARMED="773 774"
-  run_hook "gh pr view 775 --repo ycpss91255-docker/base --json state"
+  run_hook "gh pr view 775 --repo ycpss91255-lab/base --json state"
   assert_silent
 }
 
@@ -201,16 +201,16 @@ run_hook() {
 exit 1
 EOF
   chmod +x "${STUB_DIR}/gh"
-  run_hook "gh pr merge 775 --repo ycpss91255-docker/base --auto --squash"
+  run_hook "gh pr merge 775 --repo ycpss91255-lab/base --auto --squash"
   assert_silent
 }
 
 @test "N4: mixed armed set excludes only the PR being armed" {
   export ARMED="774 775"
-  run_hook "gh pr merge 775 --repo ycpss91255-docker/base --auto --squash"
+  run_hook "gh pr merge 775 --repo ycpss91255-lab/base --auto --squash"
   assert_permission_decision "deny"
   local reason
   reason="$(echo "${output}" | jq -r '.hookSpecificOutput.permissionDecisionReason // empty')"
   [[ "${reason}" == *"already has 1 auto-merge-armed"* ]] || { echo "want count 1, got: ${reason}"; return 1; }
-  [[ "${reason}" == *"serial-merge.sh ycpss91255-docker/base 774 775"* ]] || { echo "want 774 excluded-self order, got: ${reason}"; return 1; }
+  [[ "${reason}" == *"serial-merge.sh ycpss91255-lab/base 774 775"* ]] || { echo "want 774 excluded-self order, got: ${reason}"; return 1; }
 }

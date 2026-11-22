@@ -2,12 +2,12 @@
 #
 # log.sh - OTel-aligned 5-level logger.
 #
-# Mirror of ycpss91255-docker/base@v0.37.0
+# Mirror of ycpss91255-lab/base@v0.37.0
 # (base/script/docker/lib/log.sh). Vendored because docker_harness is
 # a sibling repo to base (not a `.base/` subtree consumer), so it
 # cannot `source` the upstream lib directly. Keep this file in sync
 # when upstream log.sh changes; the API + dispatch + body enum rules
-# are governed by ycpss91255-docker/base#423 + base#438 -- this is a
+# are governed by ycpss91255-lab/base#423 + base#438 -- this is a
 # carrier, not the contract.
 #
 # 5 functions: _log_debug, _log_info, _log_warn, _log_err, _log_fatal.

@@ -50,7 +50,7 @@ teardown() {
 # --- the changelog directory is one category, not one filename (refs #308) ---
 #
 # Same inversion as check_no_ai_attribution.sh: after
-# `ycpss91255-docker/base`#926 the prose that legitimately quotes forbidden
+# `ycpss91255-lab/base`#926 the prose that legitimately quotes forbidden
 # characters lives in `doc/changelog/vX.Y.md`, while the exempt name
 # `CHANGELOG.md` became a generated index of derived rows.
 

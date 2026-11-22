@@ -1,4 +1,4 @@
-# roster.tsv -- the ONE list of ycpss91255-docker repos (refs #272).
+# roster.tsv -- the ONE list of ycpss91255-lab repos (refs #272).
 #
 # This file replaced four copies that had already diverged:
 # batch-base-upgrade.sh's DEFAULT_REPOS listed app/realsense_ros2 as active,
@@ -11,7 +11,7 @@
 #
 # HOW THE realsense_ros2 CONTRADICTION WAS RESOLVED. The two notes disagreed
 # about whether its template -> .base subtree migration had happened. It has:
-# ycpss91255-docker/realsense_ros2's main carries `.base/.version`, and the
+# ycpss91255-lab/realsense_ros2's main carries `.base/.version`, and the
 # re-add landed deliberately in #199 ("re-add realsense_ros2 to DEFAULT_REPOS
 # after rename") with #238 updating the note again. check-template-versions.sh
 # never got either edit, so its comment was simply the older of the two. The
@@ -22,7 +22,7 @@
 # pending / rename pending), not that one.
 #
 # COLUMNS (tab-separated; no tabs inside a field):
-#   repo      GitHub repo name under ycpss91255-docker.
+#   repo      GitHub repo name under ycpss91255-lab.
 #   path      Workspace-relative checkout, for the tooling that iterates by
 #             path. `-` when no tooling here iterates that repo by path.
 #   fanout    active | parked | n-a -- scope of the `.base` subtree fanout

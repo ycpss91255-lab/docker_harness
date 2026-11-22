@@ -35,7 +35,7 @@
 # Options:
 #   --branch <name>      Required. Chore branch to patch in each repo
 #                        (e.g. chore/base-v0.28.2).
-#   --org <owner>        GitHub owner for clones (default: ycpss91255-docker).
+#   --org <owner>        GitHub owner for clones (default: ycpss91255-lab).
 #   --repos <r1,r2,...>  Comma-separated short repo names (default: every
 #                        .base consumer in lib/roster.tsv, active or parked --
 #                        the patch is idempotent and pre-dates the pauses).
@@ -50,7 +50,7 @@ _FDLL_SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pw
 # shellcheck source=lib/log.sh disable=SC1091
 source "${_FDLL_SCRIPT_DIR}/lib/log.sh"
 
-readonly DEFAULT_ORG='ycpss91255-docker'
+readonly DEFAULT_ORG='ycpss91255-lab'
 # Default scope comes from lib/roster.tsv (refs #272). The hardcoded list this
 # replaced still named `realsense_humble` / `realsense_noetic`, renamed away
 # long before -- which is the whole reason a hand-kept copy is the bug: a

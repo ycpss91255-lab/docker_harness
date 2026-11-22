@@ -33,7 +33,7 @@ SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)"
 readonly SCRIPT_DIR
 # shellcheck source=lib/log.sh disable=SC1091
 source "${SCRIPT_DIR}/lib/log.sh"
-readonly ORG="ycpss91255-docker"
+readonly ORG="ycpss91255-lab"
 readonly BRANCH="chore/gitignore-claude-symlink"
 readonly TITLE="chore: gitignore .claude (also covers symlinks)"
 

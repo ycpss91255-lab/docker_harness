@@ -36,7 +36,7 @@ ack_path_for() {
 # ---- positive: for-loop + mutation → deny + write checkpoint ----
 
 @test "denies for-loop with gh issue close" {
-  local cmd='for r in ros_distro ros2_distro; do gh issue close 1 -R ycpss91255-docker/$r; done'
+  local cmd='for r in ros_distro ros2_distro; do gh issue close 1 -R ycpss91255-lab/$r; done'
   run "$(hook enforce_batch_via_script.sh)" \
     <<< "{\"tool_input\":{\"command\":\"${cmd}\"}}"
   assert_permission_decision "deny"
@@ -92,7 +92,7 @@ ack_path_for() {
 }
 
 @test "deny reason mentions permanent script under .claude/scripts/" {
-  local cmd='for r in a b; do gh issue close 1 -R ycpss91255-docker/$r; done'
+  local cmd='for r in a b; do gh issue close 1 -R ycpss91255-lab/$r; done'
   run "$(hook enforce_batch_via_script.sh)" \
     <<< "{\"tool_input\":{\"command\":\"${cmd}\"}}"
   assert_success
@@ -115,7 +115,7 @@ ack_path_for() {
 # ---- negative: pass-through silent ----
 
 @test "silent on for-loop with read-only gh pr view" {
-  local cmd='for r in ros_distro ros2_distro; do gh pr view 1 -R ycpss91255-docker/$r --json state; done'
+  local cmd='for r in ros_distro ros2_distro; do gh pr view 1 -R ycpss91255-lab/$r --json state; done'
   run "$(hook enforce_batch_via_script.sh)" \
     <<< "{\"tool_input\":{\"command\":\"${cmd}\"}}"
   assert_silent
@@ -143,7 +143,7 @@ ack_path_for() {
 
 @test "silent on standalone gh issue close (no for-loop)" {
   run "$(hook enforce_batch_via_script.sh)" \
-    <<< '{"tool_input":{"command":"gh issue close 1 -R ycpss91255-docker/docker_harness"}}'
+    <<< '{"tool_input":{"command":"gh issue close 1 -R ycpss91255-lab/docker_harness"}}'
   assert_silent
 }
 
@@ -171,7 +171,7 @@ ack_path_for() {
 # ---- ack-bypass + hash isolation ----
 
 @test "allows same for-loop after ack file exists" {
-  local cmd='for r in a b; do gh issue close 1 -R ycpss91255-docker/$r; done'
+  local cmd='for r in a b; do gh issue close 1 -R ycpss91255-lab/$r; done'
   local ack
   ack="$(ack_path_for "${cmd}")"
   : > "${ack}"
@@ -191,6 +191,6 @@ ack_path_for() {
   other_ack="$(ack_path_for "for r in unrelated; do git push origin main; done")"
   : > "${other_ack}"
   run "$(hook enforce_batch_via_script.sh)" \
-    <<< '{"tool_input":{"command":"for r in a b; do gh issue close 1 -R ycpss91255-docker/$r; done"}}'
+    <<< '{"tool_input":{"command":"for r in a b; do gh issue close 1 -R ycpss91255-lab/$r; done"}}'
   assert_permission_decision "deny"
 }

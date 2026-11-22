@@ -70,14 +70,14 @@ EOF
   assert_output --partial '"reason":"non-numeric-pr"'
 }
 
-@test "short repo name is normalized to ycpss91255-docker/<repo>" {
+@test "short repo name is normalized to ycpss91255-lab/<repo>" {
   stub_gh_capture
   run "$(script batch-pr-close.sh)" --reason "superseded" ai_agent:42
   assert_success
-  assert_output --partial '"repo":"ycpss91255-docker/ai_agent"'
+  assert_output --partial '"repo":"ycpss91255-lab/ai_agent"'
   assert_output --partial '"pr":"42"'
   run cat "${GH_STUB_DIR}/calls.log"
-  assert_output --partial "ycpss91255-docker/ai_agent"
+  assert_output --partial "ycpss91255-lab/ai_agent"
 }
 
 @test "full owner/repo form is accepted (no prefix added)" {
@@ -85,7 +85,7 @@ EOF
   run "$(script batch-pr-close.sh)" --reason "x" other-org/repo:5
   assert_success
   assert_output --partial '"repo":"other-org/repo"'
-  refute_output --partial "ycpss91255-docker/other-org"
+  refute_output --partial "ycpss91255-lab/other-org"
 }
 
 @test "--owner overrides default for short form" {
@@ -100,8 +100,8 @@ EOF
   run "$(script batch-pr-close.sh)" --reason "x" --dry-run ai_agent:1 claude_code:2
   assert_success
   assert_output --partial '"body":"dry_run_cmd"'
-  assert_output --partial '"repo":"ycpss91255-docker/ai_agent"'
-  assert_output --partial '"repo":"ycpss91255-docker/claude_code"'
+  assert_output --partial '"repo":"ycpss91255-lab/ai_agent"'
+  assert_output --partial '"repo":"ycpss91255-lab/claude_code"'
   refute_output --partial '"severity_text":"ERROR"'
 }
 

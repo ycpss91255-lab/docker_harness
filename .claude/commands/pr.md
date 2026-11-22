@@ -1,4 +1,4 @@
-Create a PR for a bug fix, new feature, or refactoring. TRIGGER when: user asks to fix a bug, add a feature, refactor code, modify scripts (`*.sh`), Dockerfile, compose.yaml, CI workflows (`.github/workflows/*`), `.claude/**`, or any other source under `ycpss91255-docker/*`. Apply this workflow proactively without waiting for the user to type `/pr` — natural-language requests like 「處理 xxx」「修 xxx」「加 --foo flag」「重構 yyy」 all count.
+Create a PR for a bug fix, new feature, or refactoring. TRIGGER when: user asks to fix a bug, add a feature, refactor code, modify scripts (`*.sh`), Dockerfile, compose.yaml, CI workflows (`.github/workflows/*`), `.claude/**`, or any other source under `ycpss91255-lab/*`. Apply this workflow proactively without waiting for the user to type `/pr` — natural-language requests like 「處理 xxx」「修 xxx」「加 --foo flag」「重構 yyy」 all count.
 
 IMPORTANT: All code changes (bug fix, new feature, refactoring, file moves, path changes, Dockerfile changes) MUST go through this PR workflow. Only pure documentation updates (README text, CLAUDE.md) can be pushed directly to main.
 

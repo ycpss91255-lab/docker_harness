@@ -168,7 +168,7 @@
     - structured kvs (`repo=X` / `pr=N` / `reason=...`) prefer over message blobs; JSON output in non-tty / text in tty (tty-detect single-sink)
     - `check-log-helper-usage.sh` (Makefile `log-helper-check`) fails CI on bare `printf` / `echo` outside `usage()` body or allowlist markers
     - allowlist markers - `# log-allow:script` (file-wide) / `# log-allow:start` ... `# log-allow:end` (block) for data-product output (markdown tables, copy-paste hints, Monitor protocol)
-  refs: ycpss91255-docker/docker_harness#148 + ycpss91255-docker/base#423 + base#438
+  refs: ycpss91255-lab/docker_harness#148 + ycpss91255-lab/base#423 + base#438
 
 - name: lib-defensive-unset-vars
   trigger:
@@ -180,7 +180,7 @@
     - canonical breakage example - `_collect_logging` referencing `${_SETUP_SCRIPT_DIR}` works when setup.sh sources it but explodes from init.sh / upgrade.sh (refs base#402 PR-B CI fix in #486)
     - decide per call - if the var is truly required, refuse cleanly via explicit `[[ -z "${VAR:-}" ]] && return 0` instead of `${VAR:?}` so the helper degrades to no-op instead of aborting the sourcing chain
     - test surface - unit specs for shared libs MUST cover both "called from wrapper with VAR set" and "called from init.sh with VAR unset" branches
-  refs: ycpss91255-docker/base#402 PR-B follow-up fix (commit e146c91 in #486)
+  refs: ycpss91255-lab/base#402 PR-B follow-up fix (commit e146c91 in #486)
 
 - name: tdd-four-categories
   trigger:
@@ -201,7 +201,7 @@
     - search code with the Grep tool, not `grep`-piped-into-`awk` over source files
     - `awk` / `sed` / `cat` pipelines are fine for genuinely clean tabular / column data (e.g. `jq ... | awk '{print $1}'` after jq has already extracted)
     - safety net - warn_structured_data_text_tools.sh (PreToolUse) nudges when awk/sed touch a .json/.jsonl path with no jq present; non-blocking
-  refs: ycpss91255-docker/docker_harness PR (warn_structured_data_text_tools hook)
+  refs: ycpss91255-lab/docker_harness PR (warn_structured_data_text_tools hook)
 
 - name: verify-via-bats-not-bash-c
   trigger:
@@ -211,4 +211,4 @@
     - `bash -c '...'` hits the `Bash(bash -c:*)` ask rule every time -- that rule is correct (arbitrary code execution cannot be safely allowlisted), so the fix is to stop reaching for `bash -c`, not to widen permissions
     - an inline source-and-assert snippet (source lib, build fixture, call fn, assert output) IS a unit test in disguise -- write it as a `test/unit/*_spec.bats` and it becomes a permanent regression test with zero prompts
     - genuinely one-off host diagnostics that recur belong in a committed `.claude/scripts/<name>.sh` (allowlist the path); a true single-use check can take the one manual approval
-  refs: ycpss91255-docker/docker_harness#190 + base#523 (ci.sh single-file mode)
+  refs: ycpss91255-lab/docker_harness#190 + base#523 (ci.sh single-file mode)

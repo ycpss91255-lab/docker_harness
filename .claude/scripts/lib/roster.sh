@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # roster.sh -- the single reader for lib/roster.tsv, the one list of
-# ycpss91255-docker repos (refs #272).
+# ycpss91255-lab repos (refs #272).
 #
 # Why a library rather than a copied array: the roster used to live in four
 # places, and two of them disagreed about whether app/realsense_ros2 was in the
