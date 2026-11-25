@@ -30,14 +30,14 @@ Follow this workflow:
 4. **Check CI status** for all PRs:
    ```bash
    for repo in <repos>; do
-     gh pr view <number> -R "ycpss91255-docker/${repo}" --json statusCheckRollup --jq '...'
+     gh pr view <number> -R "ycpss91255-lab/${repo}" --json statusCheckRollup --jq '...'
    done
    ```
 
 5. **Merge all** when CI passes:
    ```bash
    for repo in <repos>; do
-     gh pr merge <number> -R "ycpss91255-docker/${repo}" --squash --delete-branch
+     gh pr merge <number> -R "ycpss91255-lab/${repo}" --squash --delete-branch
    done
    ```
 

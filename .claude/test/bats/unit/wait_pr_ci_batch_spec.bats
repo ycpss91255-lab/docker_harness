@@ -61,7 +61,7 @@ stub_gh() {
   stub_gh '{"mergeable":"MERGEABLE","statusCheckRollup":[{"name":"test","conclusion":"SUCCESS"}]}'
   run "$(script wait-pr-ci-batch.sh)" ai_agent:1 --interval 0 --max-iterations 3
   assert_success
-  assert_output --partial "ycpss91255-docker/ai_agent#1: checks=all-pass mergeable=MERGEABLE"
+  assert_output --partial "ycpss91255-lab/ai_agent#1: checks=all-pass mergeable=MERGEABLE"
   assert_output --partial "ALL_DONE"
 }
 
@@ -70,7 +70,7 @@ stub_gh() {
   run "$(script wait-pr-ci-batch.sh)" other-org/repo:5 --interval 0 --max-iterations 3
   assert_success
   assert_output --partial "other-org/repo#5"
-  refute_output --partial "ycpss91255-docker/other-org"
+  refute_output --partial "ycpss91255-lab/other-org"
 }
 
 @test "--owner overrides default for short form" {
@@ -85,11 +85,11 @@ stub_gh() {
   run "$(script wait-pr-ci-batch.sh)" ai_agent:9 --interval 0 --max-iterations 3
   assert_failure 1
   assert_output --partial "checks=FAIL"
-  assert_output --partial "FAIL ycpss91255-docker/ai_agent#9"
+  assert_output --partial "FAIL ycpss91255-lab/ai_agent#9"
 }
 
 @test "mixed SUCCESS+SKIPPED rollup hits ALL_DONE" {
-  # refs ycpss91255-docker/docker_harness#86 -- sibling of wait-pr-ci.sh.
+  # refs ycpss91255-lab/docker_harness#86 -- sibling of wait-pr-ci.sh.
   stub_gh '{"mergeable":"MERGEABLE","statusCheckRollup":[{"name":"test","status":"COMPLETED","conclusion":"SUCCESS"},{"name":"Integration","status":"COMPLETED","conclusion":"SKIPPED"}]}'
   run "$(script wait-pr-ci-batch.sh)" a/b:1 --interval 0 --max-iterations 3
   assert_success
@@ -296,7 +296,7 @@ STUB_EOF
   assert_output --partial "--min-checks"
 }
 
-# Stale-rollup guards (refs ycpss91255-docker/docker_harness#60). Mirror
+# Stale-rollup guards (refs ycpss91255-lab/docker_harness#60). Mirror
 # the wait-pr-ci.sh tests; the batch script must apply the same demotion
 # rules per-pair so one stale PR doesn't abort the batch.
 
@@ -339,7 +339,7 @@ STUB_EOF
     '{"mergeable":"MERGEABLE","statusCheckRollup":[{"name":"test","status":"COMPLETED","conclusion":"SUCCESS","completedAt":"2099-01-01T00:00:00Z"}],"headRefOid":"b111111bbbbbbbb"}'
   run "$(script wait-pr-ci-batch.sh)" ai_agent:1 --interval 0 --max-iterations 2
   assert_failure 124
-  assert_output --partial "[head-moved] ycpss91255-docker/ai_agent#1 a000000..b111111"
+  assert_output --partial "[head-moved] ycpss91255-lab/ai_agent#1 a000000..b111111"
   refute_output --partial "ALL_DONE"
 }
 
@@ -362,12 +362,12 @@ STUB_EOF
 }
 
 @test "all pairs state=MERGED exits 0 with ALL_DONE (batch)" {
-  # refs ycpss91255-docker/docker_harness#113.
+  # refs ycpss91255-lab/docker_harness#113.
   stub_gh '{"state":"MERGED","mergeable":"UNKNOWN","statusCheckRollup":[{"name":"call-docker-build / docker-build","conclusion":"SUCCESS"}]}'
   run "$(script wait-pr-ci-batch.sh)" ai_agent:1 claude_code:2 --interval 0 --max-iterations 3
   assert_success
-  assert_output --partial "ycpss91255-docker/ai_agent#1: state=MERGED (auto-merge completed)"
-  assert_output --partial "ycpss91255-docker/claude_code#2: state=MERGED (auto-merge completed)"
+  assert_output --partial "ycpss91255-lab/ai_agent#1: state=MERGED (auto-merge completed)"
+  assert_output --partial "ycpss91255-lab/claude_code#2: state=MERGED (auto-merge completed)"
   assert_output --partial "ALL_DONE"
 }
 
@@ -375,8 +375,8 @@ STUB_EOF
   stub_gh '{"state":"CLOSED","mergeable":"UNKNOWN","statusCheckRollup":[{"name":"call-docker-build / docker-build","conclusion":"SUCCESS"}]}'
   run "$(script wait-pr-ci-batch.sh)" ai_agent:1 --interval 0 --max-iterations 3
   assert_failure 1
-  assert_output --partial "ycpss91255-docker/ai_agent#1: state=CLOSED without merge"
-  assert_output --partial "FAIL ycpss91255-docker/ai_agent#1 (state=CLOSED without merge)"
+  assert_output --partial "ycpss91255-lab/ai_agent#1: state=CLOSED without merge"
+  assert_output --partial "FAIL ycpss91255-lab/ai_agent#1 (state=CLOSED without merge)"
 }
 
 @test "absent .state field preserves backwards-compatible behaviour (batch)" {
@@ -384,7 +384,7 @@ STUB_EOF
   run "$(script wait-pr-ci-batch.sh)" ai_agent:1 --interval 0 --max-iterations 3 \
     --check-filter '.name=="call-docker-build / docker-build"'
   assert_success
-  assert_output --partial "ycpss91255-docker/ai_agent#1: checks=all-pass mergeable=MERGEABLE"
+  assert_output --partial "ycpss91255-lab/ai_agent#1: checks=all-pass mergeable=MERGEABLE"
   assert_output --partial "ALL_DONE"
   refute_output --partial "state=MERGED"
 }
@@ -409,8 +409,8 @@ STUB_EOF
     .script == "wait-pr-ci-batch.sh"
     and .exit_reason == "ALL_DONE"
     and .pairs == [
-      {"repo":"ycpss91255-docker/ai_agent","pr":1},
-      {"repo":"ycpss91255-docker/claude_code","pr":2}
+      {"repo":"ycpss91255-lab/ai_agent","pr":1},
+      {"repo":"ycpss91255-lab/claude_code","pr":2}
     ]
     and (.iterations | type) == "number"
     and (.elapsed_sec | type) == "number"
@@ -426,7 +426,7 @@ STUB_EOF
   assert_failure 1
   local log="${HOME}/.claude/log/wait-pr-ci-events.log"
   [[ -f "${log}" ]] || { echo "log not at ${log}"; return 1; }
-  jq -e '.exit_reason == "FAIL" and .pairs == [{"repo":"ycpss91255-docker/ai_agent","pr":3}]' \
+  jq -e '.exit_reason == "FAIL" and .pairs == [{"repo":"ycpss91255-lab/ai_agent","pr":3}]' \
     "${log}" >/dev/null \
     || { cat "${log}"; return 1; }
 }

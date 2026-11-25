@@ -40,7 +40,7 @@ run_hook() {
 }
 
 @test "fires on numeric N=11 repos" {
-  run_hook "Process 11 repos under ycpss91255-docker."
+  run_hook "Process 11 repos under ycpss91255-lab."
   assert_success
   assert_output --partial "Parallel-Agent reminder"
   assert_output --partial "numeric N=11"
@@ -124,7 +124,7 @@ run_hook() {
 }
 
 @test "CJK quantifier '所有 repo' fires" {
-  run_hook "處理所有 repos under ycpss91255-docker."
+  run_hook "處理所有 repos under ycpss91255-lab."
   assert_success
   assert_output --partial "Parallel-Agent reminder"
 }

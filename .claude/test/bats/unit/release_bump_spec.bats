@@ -10,7 +10,7 @@
 # fourth edit -- the Keep-a-Changelog compare link -- had simply stopped
 # happening: base's CHANGELOG carries 16 link definitions for 106 version
 # headings, so ~90 headings render as dangling references, and the 16 that do
-# exist still point at `github.com/ycpss91255-docker/template`, the pre-rename
+# exist still point at `github.com/ycpss91255-lab/template`, the pre-rename
 # URL. That is the signature of a hand-run step: the part nobody notices
 # missing stops happening and never comes back.
 #
@@ -26,7 +26,7 @@ setup() {
   git -C "${REPO}" init -q -b main
   git -C "${REPO}" config user.email t@t
   git -C "${REPO}" config user.name t
-  git -C "${REPO}" remote add origin https://github.com/ycpss91255-docker/base.git
+  git -C "${REPO}" remote add origin https://github.com/ycpss91255-lab/base.git
   mkdir -p "${REPO}/doc/changelog"
   echo 'v0.6.8' > "${REPO}/.version"
   CL="${REPO}/doc/changelog/CHANGELOG.md"
@@ -47,7 +47,7 @@ seed_changelog() {
     printf '## [v0.6.8] - 2026-04-20\n\n### Added\n- eight\n\n'
     printf '## [v0.6.7] - 2026-04-19\n\n### Added\n- seven\n\n'
     printf '## [v0.6.6] - 2026-04-18\n\n### Added\n- six\n\n'
-    printf '[v0.6.6]: https://github.com/ycpss91255-docker/template/compare/v0.6.5...v0.6.6\n'
+    printf '[v0.6.6]: https://github.com/ycpss91255-lab/template/compare/v0.6.5...v0.6.6\n'
   } > "${CL}"
 }
 
@@ -95,15 +95,15 @@ bump() { "$(script release-bump.sh)" "$@"; }
   body="$(cat "${CL}")"
   local h
   for h in v0.6.9 v0.6.8 v0.6.7 v0.6.6; do
-    grep -qE "^\[${h}\]: https://github.com/ycpss91255-docker/base/(compare|releases)" <<< "${body}" \
+    grep -qE "^\[${h}\]: https://github.com/ycpss91255-lab/base/(compare|releases)" <<< "${body}" \
       || fail "heading ${h} has no link definition:
 ${body}"
   done
-  grep -qxF '[v0.6.7]: https://github.com/ycpss91255-docker/base/compare/v0.6.6...v0.6.7' <<< "${body}" \
+  grep -qxF '[v0.6.7]: https://github.com/ycpss91255-lab/base/compare/v0.6.6...v0.6.7' <<< "${body}" \
     || fail "compare link is not previous...this"
-  grep -qxF '[v0.6.6]: https://github.com/ycpss91255-docker/base/releases/tag/v0.6.6' <<< "${body}" \
+  grep -qxF '[v0.6.6]: https://github.com/ycpss91255-lab/base/releases/tag/v0.6.6' <<< "${body}" \
     || fail "the oldest heading must anchor at its release tag, not a compare"
-  grep -qxF '[Unreleased]: https://github.com/ycpss91255-docker/base/compare/v0.6.9...HEAD' <<< "${body}" \
+  grep -qxF '[Unreleased]: https://github.com/ycpss91255-lab/base/compare/v0.6.9...HEAD' <<< "${body}" \
     || fail "Unreleased must compare the newest release against HEAD"
 }
 
@@ -113,7 +113,7 @@ ${body}"
   seed_changelog
   run bump --links-only --repo-root "${REPO}"
   assert_success
-  run grep -c 'ycpss91255-docker/template' "${CL}"
+  run grep -c 'ycpss91255-lab/template' "${CL}"
   assert_output '0'
 }
 
@@ -168,16 +168,16 @@ ${body}"
 
 @test "derives the slug from the remote, so a renamed repo self-corrects" {
   seed_changelog
-  git -C "${REPO}" remote set-url origin git@github.com:ycpss91255-docker/multi_run.git
+  git -C "${REPO}" remote set-url origin git@github.com:ycpss91255-lab/multi_run.git
   run bump --links-only --repo-root "${REPO}"
   assert_success
-  run grep -c 'github.com/ycpss91255-docker/multi_run/' "${CL}"
+  run grep -c 'github.com/ycpss91255-lab/multi_run/' "${CL}"
   refute_output '0'
 }
 
 # --- split changelog layout (refs #307) -------------------------------------
 #
-# `ycpss91255-docker/base`#926 split the changelog into one file per `0.Y`
+# `ycpss91255-lab/base`#926 split the changelog into one file per `0.Y`
 # series behind a GENERATED index. `doc/changelog/CHANGELOG.md` is now that
 # index: it carries no release section, and base's `changelog-layout` lint
 # refuses one there. The live `## [Unreleased]` lives in the series file.
@@ -213,7 +213,7 @@ seed_split() {
   seed_split
   run bump --links-only --repo-root "${REPO}"
   assert_success
-  run grep -c '^\[Unreleased\]: https://github.com/ycpss91255-docker/base/compare/' \
+  run grep -c '^\[Unreleased\]: https://github.com/ycpss91255-lab/base/compare/' \
     "${REPO}/doc/changelog/v0.43.md"
   assert_output '1'
   run grep -c 'https://github.com' "${CL}"
@@ -298,7 +298,7 @@ seed_series() {
   run bump --links-only --repo-root "${REPO}"
   assert_success
   run cat "${REPO}/doc/changelog/v0.43.md"
-  assert_line '[v0.43.0-rc1]: https://github.com/ycpss91255-docker/base/compare/v0.42.0...v0.43.0-rc1'
+  assert_line '[v0.43.0-rc1]: https://github.com/ycpss91255-lab/base/compare/v0.42.0...v0.43.0-rc1'
   refute_output --partial 'releases/tag/'
 }
 
@@ -312,12 +312,12 @@ seed_series() {
 
 @test "split layout: promoting does not degrade the cross-series link already there" {
   seed_series
-  printf '\n[Unreleased]: https://github.com/ycpss91255-docker/base/compare/v0.43.0-rc1...HEAD\n[v0.43.0-rc1]: https://github.com/ycpss91255-docker/base/compare/v0.42.0...v0.43.0-rc1\n' \
+  printf '\n[Unreleased]: https://github.com/ycpss91255-lab/base/compare/v0.43.0-rc1...HEAD\n[v0.43.0-rc1]: https://github.com/ycpss91255-lab/base/compare/v0.42.0...v0.43.0-rc1\n' \
     >> "${REPO}/doc/changelog/v0.43.md"
   run bump v0.43.0-rc2 --repo-root "${REPO}" --date 2026-09-05
   assert_success
   run cat "${REPO}/doc/changelog/v0.43.md"
-  assert_line '[v0.43.0-rc1]: https://github.com/ycpss91255-docker/base/compare/v0.42.0...v0.43.0-rc1'
+  assert_line '[v0.43.0-rc1]: https://github.com/ycpss91255-lab/base/compare/v0.42.0...v0.43.0-rc1'
   refute_output --partial 'releases/tag/'
 }
 
@@ -326,7 +326,7 @@ seed_series() {
   run bump --links-only --repo-root "${REPO}"
   assert_success
   run cat "${CL}"
-  assert_line '[v0.6.6]: https://github.com/ycpss91255-docker/base/releases/tag/v0.6.6'
+  assert_line '[v0.6.6]: https://github.com/ycpss91255-lab/base/releases/tag/v0.6.6'
 }
 
 @test "--changelog outside the layout keeps the single-file link shape" {
@@ -337,5 +337,5 @@ seed_series() {
   run bump --links-only --repo-root "${REPO}" --changelog "${REPO}/other/LOG.md"
   assert_success
   run cat "${REPO}/other/LOG.md"
-  assert_line '[v9.0.0]: https://github.com/ycpss91255-docker/base/releases/tag/v9.0.0'
+  assert_line '[v9.0.0]: https://github.com/ycpss91255-lab/base/releases/tag/v9.0.0'
 }

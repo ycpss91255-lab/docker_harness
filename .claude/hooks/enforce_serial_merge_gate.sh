@@ -45,7 +45,7 @@ HOOK_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "${HOOK_DIR}/../scripts/lib/checkpoint.sh"
 
 readonly HOOK_SLUG="enforce-serial-merge-gate"
-readonly DEFAULT_OWNER='ycpss91255-docker'
+readonly DEFAULT_OWNER='ycpss91255-lab'
 readonly REASON='Arming auto-merge on multiple same-repo PRs at once is O(N^2) in CI runs under strict branch protection (each merge marks the others BEHIND, forcing an update-branch re-run). serial-merge.sh lands them one at a time -> O(N).'
 
 main() {

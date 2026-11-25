@@ -3,7 +3,7 @@
 
 #
 # One-shot fanout for the 5 sensor-app repos still on
-# ycpss91255-docker/base v0.23.0 with `template/` subtree:
+# ycpss91255-lab/base v0.23.0 with `template/` subtree:
 #
 #   - app/realsense_humble
 #   - app/realsense_noetic
@@ -58,7 +58,7 @@ SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)"
 readonly SCRIPT_DIR
 # shellcheck source=lib/log.sh disable=SC1091
 source "${SCRIPT_DIR}/lib/log.sh"
-readonly ORG="ycpss91255-docker"
+readonly ORG="ycpss91255-lab"
 readonly BASE_REPO="${ORG}/base"
 readonly BASE_REMOTE="https://github.com/${BASE_REPO}.git"
 readonly TARGET_VERSION="v0.27.0"

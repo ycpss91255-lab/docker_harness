@@ -3,7 +3,7 @@
 # changelog" (refs #307, #308).
 #
 # Why a library rather than a literal per caller: `doc/changelog/CHANGELOG.md`
-# was written out in seven places, and `ycpss91255-docker/base`#926 then split
+# was written out in seven places, and `ycpss91255-lab/base`#926 then split
 # the changelog into one file per `0.Y` series behind a GENERATED index. All
 # seven literals changed meaning at once, in different directions -- the
 # release primitive refused to promote because the index carries no

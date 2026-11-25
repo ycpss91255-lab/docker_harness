@@ -34,7 +34,7 @@ SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)"
 readonly SCRIPT_DIR
 # shellcheck source=lib/log.sh disable=SC1091
 source "${SCRIPT_DIR}/lib/log.sh"
-readonly ORG="ycpss91255-docker"
+readonly ORG="ycpss91255-lab"
 
 # Default scope = the roster's `mutation` column (refs #272), the same call
 # batch-mutation-pr.sh makes. This file used to carry its own copy of the

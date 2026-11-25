@@ -13,14 +13,14 @@
 #   batch-pr-close.sh [options] --reason "<msg>" <repo>:<pr> [<repo>:<pr> ...]
 #
 # `<repo>` is short (e.g. `ai_agent`) — prefixed with the default owner
-# `ycpss91255-docker` — or full (`<owner>/<repo>`). Mirrors
+# `ycpss91255-lab` — or full (`<owner>/<repo>`). Mirrors
 # batch-pr-merge.sh / wait-pr-ci-batch.sh.
 #
 # Options:
 #   --reason <msg>       Required. Comment posted on each PR before close,
 #                        explaining the supersession. Visible to reviewers.
 #   --owner <OWNER>      Default owner for short `<repo>` form
-#                        (default: ycpss91255-docker)
+#                        (default: ycpss91255-lab)
 #   --no-delete-branch   Keep the source branch after close (default deletes).
 #   --dry-run            Print planned closes and exit without invoking gh.
 #   -h, --help           Show this help.
@@ -40,7 +40,7 @@ _BPC_SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd
 # shellcheck source=lib/log.sh disable=SC1091
 source "${_BPC_SCRIPT_DIR}/lib/log.sh"
 
-readonly DEFAULT_OWNER='ycpss91255-docker'
+readonly DEFAULT_OWNER='ycpss91255-lab'
 
 usage() {
   sed -n '/^# Usage:/,/^$/p' "${BASH_SOURCE[0]}" | sed 's/^# \{0,1\}//' >&2

@@ -21,7 +21,7 @@
 #   - `git push <remote> :v...` (delete by refspec)
 #   - `git push <remote>` without a v-tag refspec (normal branch push)
 #
-# Refs: issue ycpss91255-docker/docker_harness#106.
+# Refs: issue ycpss91255-lab/docker_harness#106.
 
 set -uo pipefail
 

@@ -82,7 +82,7 @@ readonly SCRIPT_DIR
 # shellcheck source=lib/roster.sh disable=SC1091
 source "${SCRIPT_DIR}/lib/roster.sh"
 
-readonly ORG="ycpss91255-docker"
+readonly ORG="ycpss91255-lab"
 readonly VERSION_MARKER=".base/.version"
 
 usage() {

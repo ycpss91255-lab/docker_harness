@@ -26,7 +26,7 @@
 #   ADR_REMIND_THRESHOLD   (default 3)
 #   ADR_REMIND_DISABLE     (set to 1 to disable)
 #
-# Refs: issue ycpss91255-docker/docker_harness#97.
+# Refs: issue ycpss91255-lab/docker_harness#97.
 
 set -uo pipefail
 

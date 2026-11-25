@@ -51,7 +51,7 @@ teardown() {
 
 # --- split changelog layout (refs #308) -------------------------------------
 #
-# After `ycpss91255-docker/base`#926, `doc/changelog/CHANGELOG.md` is a
+# After `ycpss91255-lab/base`#926, `doc/changelog/CHANGELOG.md` is a
 # GENERATED index and base's `changelog-layout` lint refuses a release section
 # in it. Asking a commit for that file asks for the one file it must NOT
 # hand-edit, and every code commit on base tripped the warning while correctly

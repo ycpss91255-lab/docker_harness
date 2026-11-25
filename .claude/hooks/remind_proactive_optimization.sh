@@ -18,7 +18,7 @@
 # / doc drift / manual repetition) at task wrap-up. The rule fires
 # inconsistently today because there is no enforcement layer. This Stop
 # hook is the boundary-triggered reminder. Refs issue
-# ycpss91255-docker/docker_harness#124.
+# ycpss91255-lab/docker_harness#124.
 #
 # Heuristics:
 #   Task boundary -- ANY of:

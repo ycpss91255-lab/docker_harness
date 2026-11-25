@@ -82,10 +82,10 @@ EOF
   assert_output ""
 }
 
-@test "default-owner expansion: short repo foo -> ycpss91255-docker/foo" {
+@test "default-owner expansion: short repo foo -> ycpss91255-lab/foo" {
   run "${SCRIPT}" foo 5
   assert_success
-  run grep -q "delegate repo=ycpss91255-docker/foo pr=5" "${CALL_LOG}"
+  run grep -q "delegate repo=ycpss91255-lab/foo pr=5" "${CALL_LOG}"
   assert_success
 }
 

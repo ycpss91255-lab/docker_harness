@@ -1,4 +1,4 @@
-Auto-fix one or all open GitHub issues under `ycpss91255-docker/<repo>` when their scope is reasonable, refusing (with an explanatory comment on each issue) when not.
+Auto-fix one or all open GitHub issues under `ycpss91255-lab/<repo>` when their scope is reasonable, refusing (with an explanatory comment on each issue) when not.
 
 Use this when you've already triaged via `/issue-check` and want to delegate one specific issue, or sweep every open issue on a repo in one go.
 
@@ -8,7 +8,7 @@ Use this when you've already triaged via `/issue-check` and want to delegate one
 /issue-fix <repo> [<issue_num>|all] [--dry-run] [--limit N]
 ```
 
-- `<repo>` (required) — short name under `ycpss91255-docker`, e.g. `base`, `docker_harness`, `ai_agent`, `ros1_bridge`
+- `<repo>` (required) — short name under `ycpss91255-lab`, e.g. `base`, `docker_harness`, `ai_agent`, `ros1_bridge`
 - `<issue_num>` (optional) — issue number. **If omitted or set to `all`, run batch mode** over every open issue on the repo (oldest first, FIFO).
 - `--dry-run` (optional) — read + evaluate + print the plan; do NOT open a worktree, branch, comment on the issue, or open a PR. Compatible with batch mode (lists verdict per issue).
 - `--limit N` (optional, batch mode only) — process at most `N` issues after filtering. Default unlimited.
@@ -27,7 +27,7 @@ Triggered when `<issue_num>` is `all` or omitted. Sequence:
 
 1. **List**:
    ```bash
-   gh issue list -R "ycpss91255-docker/<repo>" --state open \
+   gh issue list -R "ycpss91255-lab/<repo>" --state open \
      --json number,title,createdAt,labels,assignees,closedByPullRequestsReferences \
      --limit 200
    ```
@@ -55,7 +55,7 @@ Batch mode is **serial, not parallel** — one issue's PR must reach CI green (o
 ### 1. Fetch issue context
 
 ```bash
-gh issue view <issue_num> -R "ycpss91255-docker/<repo>" \
+gh issue view <issue_num> -R "ycpss91255-lab/<repo>" \
   --json number,title,body,state,labels,assignees,author,createdAt,updatedAt,closedByPullRequestsReferences,comments,timelineItems
 ```
 
@@ -162,7 +162,7 @@ PR body MUST include `Closes #<issue_num>` so merging auto-closes the issue. Bod
 
 ```bash
 # Write body to a file first per CLAUDE.md `gh ... --body-file` rule
-gh pr create -R "ycpss91255-docker/<repo>" \
+gh pr create -R "ycpss91255-lab/<repo>" \
   --head "fix/issue-<num>-<slug>" --base main \
   --title "fix: <short description>" \
   --body-file "/tmp/issue-fix-pr-<num>.md"
@@ -182,7 +182,7 @@ Use the `wait-pr-ci` skill (`.claude/skills/wait-pr-ci/SKILL.md`). Per-repo `--c
 On `ALL_DONE`: **auto-merge** (matching `/pr.md` and `wait-pr-ci` skill defaults) and clean up:
 
 ```bash
-gh pr merge <N> --repo "ycpss91255-docker/<repo>" --squash --delete-branch
+gh pr merge <N> --repo "ycpss91255-lab/<repo>" --squash --delete-branch
 git -C "<source-tree>" fetch origin main
 git -C "<source-tree>" worktree remove "$WORKTREE"
 ```
@@ -234,7 +234,7 @@ If `--dry-run`, replace the verb breakdown with: `預計修：K · 預計拒絕�
 - **Auto-merge on CI green** — matches `/pr.md` and `wait-pr-ci` skill defaults. CI green is the gate; passing CI on a 0-required-review repo means the change is shippable. The user can always revert via PR or pull the auto-merged commit out if something slipped through. CI red still halts (single-issue: report; batch: stop the whole batch).
 - **Batch mode is serial** — one PR's CI must settle (and merge) before the next issue starts. Trades wall-clock time for safety; CI red on issue K means the agent doesn't compound debt by piling on issues K+1, K+2 with potentially conflicting fixes.
 - **Do not stack reject comments** — both modes detect existing `Reviewed by /issue-fix automation` comments and skip without re-commenting. Single-issue mode reports `[REJECT] <repo>#<num>: previously declined`; batch mode counts the issue under "跳過" (Skipped).
-- **Branch protection still applies** — `enforce_admins=true` + `required_status_checks` (strict) on every `ycpss91255-docker` repo means `gh pr merge` will refuse if CI didn't really pass or if the branch is out of date with main. Auto-merge here is just "stop asking the human after CI green", not "skip the branch protection gate".
+- **Branch protection still applies** — `enforce_admins=true` + `required_status_checks` (strict) on every `ycpss91255-lab` repo means `gh pr merge` will refuse if CI didn't really pass or if the branch is out of date with main. Auto-merge here is just "stop asking the human after CI green", not "skip the branch protection gate".
 - **CJK block** — `remind_no_chinese_in_git_artifacts.sh` (PreToolUse, blocking) prevents CJK in commit / PR / issue comment bodies. The user-facing summary lines (single-issue + batch summary block) stay in Traditional Chinese — terminal output is not a git/GitHub artifact.
 
 Context from user: $ARGUMENTS

@@ -54,7 +54,7 @@ main() {
   for _rel in "${AFFECTED_REPOS[@]}"; do
     _repo_dir="${WORKSPACE}/${_rel}"
     _reponame="${_rel##*/}"
-    _origin="https://github.com/ycpss91255-docker/${_reponame}.git"
+    _origin="https://github.com/ycpss91255-lab/${_reponame}.git"
 
     _log_info fix-compose processing_repo repo="${_reponame}" branch="${BRANCH}"
 

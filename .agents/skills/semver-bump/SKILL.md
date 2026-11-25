@@ -57,7 +57,7 @@ Direct. No RC step.
 .claude/scripts/release-tag.sh v1.3.0-rc1 -m "v1.3.0-rc1: <notes>"
 
 # 2. Wait CI on the RC tag (use wait-tag-ci skill)
-.claude/scripts/wait-tag-ci.sh --repo ycpss91255-docker/<repo> --branch v1.3.0-rc1
+.claude/scripts/wait-tag-ci.sh --repo ycpss91255-lab/<repo> --branch v1.3.0-rc1
 
 # 3. Promote to non-RC
 .claude/scripts/release-tag.sh v1.3.0 -m "v1.3.0: <notes>"
@@ -75,7 +75,7 @@ promote step exits 1 with a hint to cut `rcN+1`.
 .claude/scripts/release-tag.sh v1.0.0-rc1 -m "v1.0.0-rc1: <notes>"
 
 # 3. Wait CI
-.claude/scripts/wait-tag-ci.sh --repo ycpss91255-docker/<repo> --branch v1.0.0-rc1
+.claude/scripts/wait-tag-ci.sh --repo ycpss91255-lab/<repo> --branch v1.0.0-rc1
 
 # 4. Promote with ACK env (value must equal the tag literal)
 RELEASE_X_BUMP_ACK=v1.0.0 \

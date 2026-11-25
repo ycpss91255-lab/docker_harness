@@ -264,7 +264,7 @@ call-log asserts ordering, default-owner prefix, and skip-and-continue.
 | arg validation: missing repo arg -> exit 2 | required-arg validation |
 | arg validation: repo but no PR args -> exit 2 | required-arg validation |
 | --dry-run prints planned order and makes no delegate/gh call | dry-run no-op (empty call-log) |
-| default-owner expansion: short repo foo -> ycpss91255-docker/foo | default owner prefix |
+| default-owner expansion: short repo foo -> ycpss91255-lab/foo | default owner prefix |
 | ordering: PRs are delegated in the given argument order | serial order preserved |
 | skip-and-continue: first PR fails, second still lands, exit 1 names failed PR | continue-on-error + summary |
 | arg validation: non-numeric PR -> exit 2 before any delegation | up-front validation, empty call-log |
@@ -608,7 +608,7 @@ repos with a shared `--reason` comment posted first. Sibling of
 | no pairs exits 2 | required-arg validation |
 | bad pair (no colon) exits 2 | format validation |
 | non-numeric PR exits 2 | PR validation up-front |
-| short repo name is normalized to ycpss91255-docker/\<repo> | default owner prefix |
+| short repo name is normalized to ycpss91255-lab/\<repo> | default owner prefix |
 | full owner/repo form is accepted (no prefix added) | full-form override |
 | --owner overrides default for short form | owner flag |
 | --dry-run prints planned closes and skips gh invocation | dry-run no-op |
@@ -634,7 +634,7 @@ printed by `batch-template-upgrade.sh` works for both scripts.
 | no pairs exits 2 | required-arg validation |
 | bad pair (no colon) exits 2 | format validation |
 | non-numeric PR exits 2 | PR validation up-front (before any gh call) |
-| short repo name is normalized to ycpss91255-docker/\<repo> | default owner prefix |
+| short repo name is normalized to ycpss91255-lab/\<repo> | default owner prefix |
 | full owner/repo form is accepted (no prefix added) | full form override |
 | --owner overrides default for short form | owner flag |
 | --dry-run prints planned merges and skips gh invocation | dry-run no-op |
@@ -1083,7 +1083,7 @@ makes CLAUDE.md fit the ceilings.
 ### .claude/test/bats/unit/log_spec.bats (48)
 
 Covers `.claude/scripts/lib/log.sh` -- the vendored OTel-aligned
-5-level JSON logger (mirror of `ycpss91255-docker/base@v0.37.0`,
+5-level JSON logger (mirror of `ycpss91255-lab/base@v0.37.0`,
 refs `#148`). Test cases mirror the upstream `base/test/unit/log_spec.bats`
 content, adapted for the docker_harness mount path (`/work/.claude/scripts/lib/log.sh`),
 the docker_harness body-enum vocabulary (`summary` / `repo_failed` /
@@ -1850,11 +1850,11 @@ Argument validation plus the next-step hint it prints once the PRs are open.
 
 Covers `.claude/hooks/remind_topics_yaml_on_new_repo.sh` — PreToolUse Bash
 hook that nudges for a `topics.yaml` entry when a repo is created under the
-`ycpss91255-docker` org, and stays silent for every other `gh repo` form.
+`ycpss91255-lab` org, and stays silent for every other `gh repo` form.
 
 | Test | Scenario |
 |------|----------|
-| fires on gh repo create ycpss91255-docker/\<name> | org repo create → FIRE (topics.yaml nudge) |
+| fires on gh repo create ycpss91255-lab/\<name> | org repo create → FIRE (topics.yaml nudge) |
 | fires regardless of gh repo create flag order | flag-order independence |
 | silent on gh repo create against another org | scoped to the org → SILENT |
 | silent on gh repo view (not create) | wrong subcommand → SILENT |

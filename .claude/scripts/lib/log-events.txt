@@ -1,17 +1,17 @@
 # log-events.txt - Registered body enum for _log_* (docker_harness mirror).
 #
 # One event name per line. _log_* with an unregistered body is a fatal
-# error (strict enforcement, per ycpss91255-docker/base#438).
+# error (strict enforcement, per ycpss91255-lab/base#438).
 # Adding a new event requires a same-PR addition here.
 #
-# Mirror of ycpss91255-docker/base@v0.37.0 contract; this list is
+# Mirror of ycpss91255-lab/base@v0.37.0 contract; this list is
 # docker_harness-specific (events here do not necessarily overlap with
 # base's events list, which targets container scripts -- build / setup /
 # upgrade / etc).
 #
 # Seed list (M1) derived from the migration survey at
 # /tmp/docker_harness-log-survey.md; M2-M5 will append per migrating
-# callsite same-PR. Refs ycpss91255-docker/docker_harness#148.
+# callsite same-PR. Refs ycpss91255-lab/docker_harness#148.
 
 # --- batch mutation flows ---
 processing_repo

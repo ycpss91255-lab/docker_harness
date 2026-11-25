@@ -117,21 +117,21 @@ ack_path_for() {
 # ---- positive (expanded scope): raw git subtree pull ----
 
 @test "denies git subtree pull --prefix=.base ..." {
-  local cmd="git subtree pull --prefix=.base ycpss91255-docker/base.git v0.18.2 --squash"
+  local cmd="git subtree pull --prefix=.base ycpss91255-lab/base.git v0.18.2 --squash"
   run "$(hook enforce_wrapper_first_upgrade.sh)" \
     <<< "{\"tool_input\":{\"command\":\"${cmd}\"},\"cwd\":\"${REPO}\"}"
   assert_permission_decision "deny"
 }
 
 @test "denies git subtree pull --prefix=template ... (legacy prefix)" {
-  local cmd="git subtree pull --prefix=template ycpss91255-docker/base.git v0.18.2 --squash"
+  local cmd="git subtree pull --prefix=template ycpss91255-lab/base.git v0.18.2 --squash"
   run "$(hook enforce_wrapper_first_upgrade.sh)" \
     <<< "{\"tool_input\":{\"command\":\"${cmd}\"},\"cwd\":\"${REPO}\"}"
   assert_permission_decision "deny"
 }
 
 @test "denies git -C <repo> subtree pull --prefix=.base ... (via -C arg)" {
-  local cmd="git -C ${REPO} subtree pull --prefix=.base ycpss91255-docker/base.git v0.18.2 --squash"
+  local cmd="git -C ${REPO} subtree pull --prefix=.base ycpss91255-lab/base.git v0.18.2 --squash"
   run "$(hook enforce_wrapper_first_upgrade.sh)" \
     <<< "{\"tool_input\":{\"command\":\"${cmd}\"},\"cwd\":\"/tmp\"}"
   assert_permission_decision "deny"

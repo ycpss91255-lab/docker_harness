@@ -188,7 +188,7 @@ uninstall_gh() {
 
 @test "the gate reads the repo and number out of an issue URL" {
   seed_issue "$(md '## Seams' 'x' '## First slice' 'y' '## Gate' 'z')"
-  run "$(hook enforce_ready_for_agent.sh)" <<< '{"tool_input":{"command":"gh issue edit https://github.com/ycpss91255-docker/base/issues/42 --add-label ready-for-agent"}}'
+  run "$(hook enforce_ready_for_agent.sh)" <<< '{"tool_input":{"command":"gh issue edit https://github.com/ycpss91255-lab/base/issues/42 --add-label ready-for-agent"}}'
   assert_permission_decision "deny"
   assert_message_contains "#42"
   assert_message_contains "Bound"
@@ -196,13 +196,13 @@ uninstall_gh() {
 
 @test "a complete issue named by URL still takes the label" {
   seed_issue "$(all_four)"
-  run "$(hook enforce_ready_for_agent.sh)" <<< '{"tool_input":{"command":"gh issue edit https://github.com/ycpss91255-docker/base/issues/42 --add-label ready-for-agent"}}'
+  run "$(hook enforce_ready_for_agent.sh)" <<< '{"tool_input":{"command":"gh issue edit https://github.com/ycpss91255-lab/base/issues/42 --add-label ready-for-agent"}}'
   assert_silent
 }
 
 @test "an explicit -R repo is used for the lookup" {
   seed_issue "$(md '## Seams' 'x')"
-  run "$(hook enforce_ready_for_agent.sh)" <<< '{"tool_input":{"command":"gh issue edit 42 -R ycpss91255-docker/base --add-label ready-for-agent"}}'
+  run "$(hook enforce_ready_for_agent.sh)" <<< '{"tool_input":{"command":"gh issue edit 42 -R ycpss91255-lab/base --add-label ready-for-agent"}}'
   assert_permission_decision "deny"
 }
 

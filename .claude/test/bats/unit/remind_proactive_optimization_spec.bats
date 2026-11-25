@@ -79,7 +79,7 @@ run_hook() {
 }
 
 @test "fires after gh pr merge invocation with no prior optimisation mention" {
-  emit_tool_use Bash '{"command":"gh pr merge 139 -R ycpss91255-docker/docker_harness --squash --delete-branch"}'
+  emit_tool_use Bash '{"command":"gh pr merge 139 -R ycpss91255-lab/docker_harness --squash --delete-branch"}'
   emit_text assistant "PR #139 merged."
   run_hook
   assert_success
@@ -88,20 +88,20 @@ run_hook() {
 }
 
 @test "silent when session already raised an optimisation candidate" {
-  emit_tool_use Bash '{"command":"gh pr merge 139 -R ycpss91255-docker/docker_harness --squash --delete-branch"}'
+  emit_tool_use Bash '{"command":"gh pr merge 139 -R ycpss91255-lab/docker_harness --squash --delete-branch"}'
   emit_text assistant "PR #139 merged. Noticed the close-issue+comment loop ran 3 times this session -- propose a follow-up to skillify it as a script."
   run_hook
   assert_silent
 }
 
 @test "silent when PROACTIVE_OPTIMIZATION_REMIND_DISABLE=1" {
-  emit_tool_use Bash '{"command":"gh pr merge 139 -R ycpss91255-docker/docker_harness --squash --delete-branch"}'
+  emit_tool_use Bash '{"command":"gh pr merge 139 -R ycpss91255-lab/docker_harness --squash --delete-branch"}'
   PROACTIVE_OPTIMIZATION_REMIND_DISABLE=1 run_hook
   assert_silent
 }
 
 @test "silent when stop_hook_active=true (re-entry guard)" {
-  emit_tool_use Bash '{"command":"gh pr merge 139 -R ycpss91255-docker/docker_harness --squash --delete-branch"}'
+  emit_tool_use Bash '{"command":"gh pr merge 139 -R ycpss91255-lab/docker_harness --squash --delete-branch"}'
   run_hook true
   assert_silent
 }
@@ -129,7 +129,7 @@ run_hook() {
 }
 
 @test "throttle: second fire with same signal-set is silent" {
-  emit_tool_use Bash '{"command":"gh pr merge 139 -R ycpss91255-docker/docker_harness --squash --delete-branch"}'
+  emit_tool_use Bash '{"command":"gh pr merge 139 -R ycpss91255-lab/docker_harness --squash --delete-branch"}'
   run_hook
   assert_output --partial "Proactive-optimisation reminder"
   run_hook
@@ -137,7 +137,7 @@ run_hook() {
 }
 
 @test "optimisation mention regex is case-insensitive" {
-  emit_tool_use Bash '{"command":"gh pr merge 139 -R ycpss91255-docker/docker_harness --squash --delete-branch"}'
+  emit_tool_use Bash '{"command":"gh pr merge 139 -R ycpss91255-lab/docker_harness --squash --delete-branch"}'
   emit_text assistant "Done. We should AUTOMATE this batch."
   run_hook
   assert_silent
@@ -151,7 +151,7 @@ run_hook() {
 }
 
 @test "skill-ify (with hyphen) suppresses the reminder" {
-  emit_tool_use Bash '{"command":"gh pr merge 200 -R ycpss91255-docker/docker_harness --squash --delete-branch"}'
+  emit_tool_use Bash '{"command":"gh pr merge 200 -R ycpss91255-lab/docker_harness --squash --delete-branch"}'
   emit_text user "Should we skill-ify that loop?"
   run_hook
   assert_silent

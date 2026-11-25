@@ -14,7 +14,7 @@
 # CHANGELOG on their own.
 #
 # WHICH file: derived via scripts/lib/changelog-path.sh, never named. After
-# `ycpss91255-docker/base`#926 split the changelog per `0.Y` series,
+# `ycpss91255-lab/base`#926 split the changelog per `0.Y` series,
 # `doc/changelog/CHANGELOG.md` is a GENERATED index and base's
 # `changelog-layout` lint refuses a release section in it — so this hook was
 # warning that the commit was missing the very file it must not hand-edit,

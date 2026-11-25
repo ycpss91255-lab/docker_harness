@@ -1,6 +1,6 @@
-Batch-upgrade all downstream repos under `ycpss91255-docker` to a target `base` tag.
+Batch-upgrade all downstream repos under `ycpss91255-lab` to a target `base` tag.
 
-**Naming**: this slash command (and the underlying script) keeps the `template` prefix for backward compatibility with existing scripts / muscle memory. The upstream repo was renamed `ycpss91255-docker/template` -> `ycpss91255-docker/base` and the subtree prefix moved from `template/` -> `.base/`; the slash command keeps its old name so existing workflows do not break.
+**Naming**: this slash command (and the underlying script) keeps the `template` prefix for backward compatibility with existing scripts / muscle memory. The upstream repo was renamed `ycpss91255-lab/template` -> `ycpss91255-lab/base` and the subtree prefix moved from `template/` -> `.base/`; the slash command keeps its old name so existing workflows do not break.
 
 **Scope: workspace cwd only.** The implementation script (`.claude/scripts/batch-base-upgrade.sh`) iterates `<workspace>/<category>/<repo>/` directories that exist as siblings of `.base/` in the docker workspace. If running from a per-repo session, refuse and instruct the user to re-open Claude from the docker workspace root.
 
@@ -34,7 +34,7 @@ The command delegates to `.claude/scripts/batch-base-upgrade.sh`. Designed to ru
 
 ### Optional flags
 
-- `--issue <num>` — adds `Closes part of ycpss91255-docker/base#<num>.` to PR body
+- `--issue <num>` — adds `Closes part of ycpss91255-lab/base#<num>.` to PR body
 - `--dry-run` — print plan, no mutation
 - `--only <r1,r2,...>` — limit to listed repos (relative paths, e.g. `agent/ai_agent`)
 - `--skip <r1,r2,...>` — exclude listed repos (e.g. ones pinned to older tags)
@@ -93,7 +93,7 @@ Wrap the first line in a Monitor (so it doesn't block the agent on a long poll) 
    ```bash
    .claude/scripts/batch-pr-merge.sh ai_agent:<pr> claude_code:<pr> ... | tail -30
    ```
-   Short repo form is auto-prefixed with `ycpss91255-docker/`. Don't use an ad-hoc per-repo `for` loop — that's exactly the pattern the CLAUDE.md cross-repo batch-mutation rule rules out (one prompt per loop iteration -> yes-fatigue -> effectively bypasses the ask gate).
+   Short repo form is auto-prefixed with `ycpss91255-lab/`. Don't use an ad-hoc per-repo `for` loop — that's exactly the pattern the CLAUDE.md cross-repo batch-mutation rule rules out (one prompt per loop iteration -> yes-fatigue -> effectively bypasses the ask gate).
 3. Verify each downstream main is now at the target tag with `.claude/scripts/check-template-versions.sh --expect v<X>`.
 
 ## Repo list

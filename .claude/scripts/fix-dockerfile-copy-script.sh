@@ -4,7 +4,7 @@
 # fix-dockerfile-copy-script.sh
 #
 # Patch downstream Dockerfiles for the v0.31.0 wrapper consolidation
-# (ycpss91255-docker/base#330, shipped via #359). v0.31.0 moves the
+# (ycpss91255-lab/base#330, shipped via #359). v0.31.0 moves the
 # seven user-facing wrappers (build.sh / run.sh / exec.sh / stop.sh /
 # prune.sh / setup.sh / setup_tui.sh) from the repo root into a
 # script/ subfolder. Downstream Dockerfiles that lint the wrappers
@@ -18,7 +18,7 @@
 # path is a no-op. Surfaced during v0.31.0-rc1 RC validation on
 # env/ros_distro (commit 32624a3 on the closed RC PR).
 #
-# Long-term: ycpss91255-docker/base's upgrade.sh could detect and
+# Long-term: ycpss91255-lab/base's upgrade.sh could detect and
 # auto-patch this drift so each fanout heals itself. Modelled directly
 # on the [[fix-dockerfile-lint-lib]] precedent (#284 sub-libs split).
 #
@@ -32,7 +32,7 @@
 # Options:
 #   --branch <name>      Required. Chore branch to patch in each repo
 #                        (e.g. chore/base-v0.31.0).
-#   --org <owner>        GitHub owner for clones (default: ycpss91255-docker).
+#   --org <owner>        GitHub owner for clones (default: ycpss91255-lab).
 #   --repos <r1,r2,...>  Comma-separated short repo names (default: the
 #                        active downstream set from lib/roster.tsv, the same
 #                        list /batch-base-upgrade fans out over).
@@ -47,7 +47,7 @@ _FDCS_SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pw
 # shellcheck source=lib/log.sh disable=SC1091
 source "${_FDCS_SCRIPT_DIR}/lib/log.sh"
 
-readonly DEFAULT_ORG='ycpss91255-docker'
+readonly DEFAULT_ORG='ycpss91255-lab'
 # Default scope comes from lib/roster.tsv (refs #272). `active`, matching this
 # helper's stated scope ("the active downstream repos a fanout must patch") --
 # the hardcoded pair it replaced was written when that meant two repos and was

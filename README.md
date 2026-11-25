@@ -1,6 +1,6 @@
 # docker_harness
 
-[![CI](https://github.com/ycpss91255-docker/docker_harness/actions/workflows/test.yaml/badge.svg)](https://github.com/ycpss91255-docker/docker_harness/actions/workflows/test.yaml) [![License](https://img.shields.io/badge/License-Apache--2.0-blue?style=flat-square)](./LICENSE)
+[![CI](https://github.com/ycpss91255-lab/docker_harness/actions/workflows/test.yaml/badge.svg)](https://github.com/ycpss91255-lab/docker_harness/actions/workflows/test.yaml) [![License](https://img.shields.io/badge/License-Apache--2.0-blue?style=flat-square)](./LICENSE)
 
 Workspace-level Claude Code configuration that applies across the
 sub-repos checked out under this directory (template, agent/*, env/*,
@@ -96,10 +96,10 @@ docker/                       # workspace root
 │   └── changelog/CHANGELOG.md
 ├── agent/  app/  env/        # sub-repos (independent)
 ├── template/  multi_run/     # sub-repos (independent)
-└── org-profile/              # local checkout of ycpss91255-docker/.github
+└── org-profile/              # local checkout of ycpss91255-lab/.github
 ```
 
 ## License
 
 Internal tooling. No external license; treat as part of the
-ycpss91255-docker organisation.
+ycpss91255-lab organisation.

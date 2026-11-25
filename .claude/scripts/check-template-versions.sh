@@ -42,7 +42,7 @@ readonly SCRIPT_DIR
 # shellcheck source=lib/roster.sh disable=SC1091
 source "${SCRIPT_DIR}/lib/roster.sh"
 
-readonly ORG="ycpss91255-docker"
+readonly ORG="ycpss91255-lab"
 
 usage() {
   sed -n '/^# Usage:/,/^$/p' "${BASH_SOURCE[0]}" | sed 's/^# \{0,1\}//' >&2

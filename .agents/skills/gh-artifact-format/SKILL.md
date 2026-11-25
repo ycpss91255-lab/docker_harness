@@ -176,7 +176,7 @@ GitHub recognises 5 keyword families plus regular text. Use them deliberately --
 Two notes on usage:
 
 - `Closes #N` only auto-closes when the PR merges to the **default branch**. For PRs targeting a non-main branch, the issue stays open and you must close manually.
-- Cross-repo refs work: `Closes ycpss91255-docker/base#282` from a `docker_harness` PR auto-closes the linked `base` issue when merged. Same keyword set.
+- Cross-repo refs work: `Closes ycpss91255-lab/base#282` from a `docker_harness` PR auto-closes the linked `base` issue when merged. Same keyword set.
 
 ## 6. Labels (issue create)
 
@@ -236,12 +236,12 @@ section 7 says what the one label with a precondition costs.
 
 ### Where the five come from
 
-`ycpss91255-docker/.github` holds `labels.yaml` as the org source of
+`ycpss91255-lab/.github` holds `labels.yaml` as the org source of
 truth, plus `script/sync-labels.sh` (`--apply` backfills a repo,
 `--dry-run` reports drift) and a weekly drift cron
-(ycpss91255-docker/.github#25). The same five strings are also the
+(ycpss91255-lab/.github#25). The same five strings are also the
 org-level default labels, so a repo created now starts with them and
-nothing else (ycpss91255-docker/.github#26). Never edit a managed label
+nothing else (ycpss91255-lab/.github#26). Never edit a managed label
 in the GitHub UI -- the next sync reverts it; edit `labels.yaml`, get
 review, then sync.
 

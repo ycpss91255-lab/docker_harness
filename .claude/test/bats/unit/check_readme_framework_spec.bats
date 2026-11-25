@@ -26,7 +26,7 @@ write_aligned() {
   cat > "${p}" <<'EOF'
 # Some Repo
 
-[![CI](https://github.com/ycpss91255-docker/some_repo/actions/workflows/main.yaml/badge.svg)](https://github.com/ycpss91255-docker/some_repo/actions/workflows/main.yaml)
+[![CI](https://github.com/ycpss91255-lab/some_repo/actions/workflows/main.yaml/badge.svg)](https://github.com/ycpss91255-lab/some_repo/actions/workflows/main.yaml)
 
 One-liner.
 

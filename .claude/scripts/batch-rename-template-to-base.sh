@@ -7,10 +7,10 @@
 #
 # Each affected downstream repo gets one PR that:
 #   1. `git rm -r template/`   (drops the old subtree; markers from
-#                                ycpss91255-docker/template no longer
+#                                ycpss91255-lab/template no longer
 #                                apply after the GitHub rename)
 #   2. `git subtree add --prefix=.base \
-#         ycpss91255-docker/base.git <version> --squash`
+#         ycpss91255-lab/base.git <version> --squash`
 #      (clean re-add against the renamed upstream; produces a fresh
 #       `git-subtree-dir: .base` marker so future `git subtree pull
 #       --prefix=.base` works without forging history)
@@ -23,7 +23,7 @@
 #      `.base/...`.
 #   5. Sed Dockerfile `COPY template/` -> `COPY .base/`.
 #   6. Sed `.github/workflows/main.yaml` `uses:` refs to
-#      `ycpss91255-docker/base/.github/workflows/...@<version>`.
+#      `ycpss91255-lab/base/.github/workflows/...@<version>`.
 #   7. Sed 4-language README directory tree references.
 #   8. Commit + push branch + open PR.
 #
@@ -51,7 +51,7 @@ SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)"
 readonly SCRIPT_DIR
 # shellcheck source=lib/log.sh disable=SC1091
 source "${SCRIPT_DIR}/lib/log.sh"
-readonly ORG="ycpss91255-docker"
+readonly ORG="ycpss91255-lab"
 readonly BASE_REPO="${ORG}/base"
 readonly BASE_REMOTE="https://github.com/${BASE_REPO}.git"
 readonly DEFAULT_VERSION="v0.25.0"

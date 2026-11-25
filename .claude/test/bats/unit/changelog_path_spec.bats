@@ -5,7 +5,7 @@
 #
 # Why a library rather than a literal in each caller: the path
 # `doc/changelog/CHANGELOG.md` was written out in seven places, and
-# `ycpss91255-docker/base`#926 then split the changelog into one file per
+# `ycpss91255-lab/base`#926 then split the changelog into one file per
 # `0.Y` series behind a GENERATED index. Every one of those seven literals
 # silently changed meaning at once -- the release primitive refused to
 # promote, the drift hook asked commits for the file they must NOT hand-edit,

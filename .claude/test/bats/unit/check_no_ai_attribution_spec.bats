@@ -42,7 +42,7 @@ EOF
 #
 # The exemption exists because changelog prose legitimately quotes the strings
 # this hook forbids -- an entry describing the rule, or the commit trailer it
-# bans. `ycpss91255-docker/base`#926 moved that prose out of
+# bans. `ycpss91255-lab/base`#926 moved that prose out of
 # `doc/changelog/CHANGELOG.md` and into `doc/changelog/vX.Y.md`, leaving the
 # exemption pointed at the generated index (which contains nothing but derived
 # rows and never needed it) and withheld from the files that do.

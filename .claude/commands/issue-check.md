@@ -1,10 +1,10 @@
-Check open issues across `ycpss91255-docker` repos and surface what hasn't been handled.
+Check open issues across `ycpss91255-lab` repos and surface what hasn't been handled.
 
 Use this when you want a periodic sweep of unresolved issues — what's stale, what's blocked, what should be picked up next.
 
 ## Scope
 
-Default: all repos under the `ycpss91255-docker` org.
+Default: all repos under the `ycpss91255-lab` org.
 If `$ARGUMENTS` names one or more repos (space-separated), scope to those only.
 
 ## Steps
@@ -12,12 +12,12 @@ If `$ARGUMENTS` names one or more repos (space-separated), scope to those only.
 ### 1. Collect open issues
 
 ```bash
-gh search issues "is:open org:ycpss91255-docker" \
+gh search issues "is:open org:ycpss91255-lab" \
   --json repository,number,title,author,labels,assignees,createdAt,updatedAt,url \
   --limit 200
 ```
 
-If `$ARGUMENTS` is given, filter or use `gh issue list -R ycpss91255-docker/<repo>` per repo instead.
+If `$ARGUMENTS` is given, filter or use `gh issue list -R ycpss91255-lab/<repo>` per repo instead.
 
 ### 2. For each issue, gather context
 

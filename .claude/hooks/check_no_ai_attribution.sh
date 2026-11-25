@@ -39,7 +39,7 @@ main() {
     */.claude/instincts.yaml) return 0 ;;
     # Project doc conventions that catalog/describe rule violations.
     # The changelog is exempt as a DIRECTORY, not as one filename: since
-    # `ycpss91255-docker/base`#926 the prose that quotes these patterns lives
+    # `ycpss91255-lab/base`#926 the prose that quotes these patterns lives
     # in `doc/changelog/vX.Y.md` and `CHANGELOG.md` is a generated index, so
     # naming the index exempted the one file that never needed it.
     */doc/test/*.md|*/doc/changelog/*) return 0 ;;

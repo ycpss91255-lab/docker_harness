@@ -9,7 +9,7 @@
 # Post-#201 layout: <repo>/setup.conf is the committed user override
 # (no longer gitignored), .local is gone.
 #
-# This script handles the transition for the 17 ycpss91255-docker
+# This script handles the transition for the 17 ycpss91255-lab
 # downstream repos. For each repo:
 #   1. If setup.conf.local exists, mv to setup.conf (overwriting any
 #      old gitignored snapshot). The .local content is the source of

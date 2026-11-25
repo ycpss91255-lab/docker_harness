@@ -23,7 +23,7 @@
 #   1  = blocked by rule violation (missing RC / failing RC CI / ACK)
 #   2  = arg or parse error / .version mismatch
 #
-# Refs: issue ycpss91255-docker/docker_harness#106.
+# Refs: issue ycpss91255-lab/docker_harness#106.
 
 set -uo pipefail
 

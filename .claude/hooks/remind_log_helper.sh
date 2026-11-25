@@ -12,7 +12,7 @@
 # log-helper-check` target is the gate (local wrapper: `just -f
 # .claude/test/justfile log-helper-check`); this hook is the reminder.
 #
-# Refs: ycpss91255-docker/docker_harness#148 (M5).
+# Refs: ycpss91255-lab/docker_harness#148 (M5).
 
 set -uo pipefail
 

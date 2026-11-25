@@ -1,6 +1,6 @@
 Tag and release repos following the project's semantic versioning and RC workflow.
 
-The actual ycpss91255-docker convention is **branch → bump → chore PR → merge
+The actual ycpss91255-lab convention is **branch → bump → chore PR → merge
 → tag merge commit**, not "tag main directly". Tags are annotated and applied
 on the **merge commit** of a `chore: release vX.Y.Z` PR. RC tags follow the
 same flow, just with `-rcN` suffix.
@@ -46,7 +46,7 @@ regenerates the **whole** compare-link block from the heading list plus the
 repo's own `origin` remote. Which file it edits is derived, not configured:
 the live changelog is the one file under `doc/changelog/` carrying
 `## [Unreleased]`, so the invocation above is correct both before and after a
-repo splits its changelog per series (`ycpss91255-docker/base`#926) and stays
+repo splits its changelog per series (`ycpss91255-lab/base`#926) and stays
 correct when the series rolls. `--changelog <path>` overrides it for a layout
 the rule cannot see; zero or several candidates are a refusal that names the
 directory searched and the files found. Regenerating (rather than appending) is what makes
@@ -185,7 +185,7 @@ After tagging `base@vX.Y.Z`:
 - Tags are **annotated**: always `-a` + `-m`. Lightweight tags don't carry the message and `release-worker.yaml`'s release-notes extraction breaks on them.
 - The CHANGELOG `[Unreleased]` heading must remain above the new release section for the next cycle. Don't delete it.
 - Do not `--no-verify` or skip hooks during the chore PR commit. The hook gates (CHANGELOG drift, TEST.md drift, emoji, AI attribution) catch real issues at the worst possible time of the cycle.
-- `release-worker.yaml` is not part of the `base` repo's own self-test — it lives in `base` and is consumed by container repos via `uses: ycpss91255-docker/base/.github/workflows/release-worker.yaml@<tag>`. Verify it ran cleanly via step 7.
+- `release-worker.yaml` is not part of the `base` repo's own self-test — it lives in `base` and is consumed by container repos via `uses: ycpss91255-lab/base/.github/workflows/release-worker.yaml@<tag>`. Verify it ran cleanly via step 7.
 
 ## Context
 

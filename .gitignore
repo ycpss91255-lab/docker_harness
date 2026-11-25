@@ -18,7 +18,7 @@ env/*/
 archive/*/      # archived (read-only) downstream repos kept locally for reference
 template/
 multi_run/
-org-profile/   # local checkout of ycpss91255-docker/.github (org profile)
+org-profile/   # local checkout of ycpss91255-lab/.github (org profile)
 
 # Allow agent/, app/, env/ category dirs themselves to be tracked as empty
 # placeholders if needed later; for now they have no tracked contents.

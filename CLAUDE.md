@@ -14,7 +14,7 @@ linked artifact for the actual procedure.
 
 Docker container management + configuration collection. Templates for
 ROS robotics development, AI tooling integration, and application
-deployment. All repos under the `ycpss91255-docker` GitHub org.
+deployment. All repos under the `ycpss91255-lab` GitHub org.
 
 ## 檔案命名慣例
 
@@ -76,7 +76,7 @@ git config user.name "<your-name>"
 git config user.email "<your-email>"
 ```
 
-GitHub organisation: `ycpss91255-docker`.
+GitHub organisation: `ycpss91255-lab`.
 
 ## Workflows
 

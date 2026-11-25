@@ -11,7 +11,7 @@
 # file it edits: base's Keep-a-Changelog compare-link block stopped dead at
 # `[v0.6.8]` -- 16 link definitions for 106 version headings, so ~90 headings
 # rendered as dangling references -- and the 16 that survived still pointed at
-# `github.com/ycpss91255-docker/template`, the pre-rename URL. Nobody notices a
+# `github.com/ycpss91255-lab/template`, the pre-rename URL. Nobody notices a
 # missing link definition, so once the step lapsed it never came back.
 #
 # The link block is therefore DERIVED, never appended to: every run rebuilds

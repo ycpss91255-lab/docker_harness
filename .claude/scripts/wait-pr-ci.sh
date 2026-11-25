@@ -30,7 +30,7 @@
 #                             "all-pass".
 #   --interval <seconds>      Poll interval (default 45; 0 = no sleep, for tests)
 #
-# Stale-rollup guards (refs ycpss91255-docker/docker_harness#60):
+# Stale-rollup guards (refs ycpss91255-lab/docker_harness#60):
 #   * Watch-start completedAt guard — if every filter-matched check has
 #     completedAt < <watch start>, the rollup is showing carry-over
 #     results from a previous head (typically because the agent ran this
@@ -196,7 +196,7 @@ main() {
       esac
 
       # Two guards above the original `all(.conclusion == "SUCCESS")` to fix
-      # premature ALL_DONE seen in practice (refs ycpss91255-docker/docker_harness#XX):
+      # premature ALL_DONE seen in practice (refs ycpss91255-lab/docker_harness#XX):
       #
       #  (a) `length < min_checks`  — GitHub's PR rollup briefly returns a
       #      SUBSET of expected checks right after PR creation; if all visible

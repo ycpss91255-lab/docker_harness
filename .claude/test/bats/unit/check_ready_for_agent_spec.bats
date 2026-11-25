@@ -119,7 +119,7 @@ STUBEOF
 @test "an issue URL is accepted as the target" {
   seed_issue "$(all_four)"
   run "$(script check-ready-for-agent.sh)" \
-    "https://github.com/ycpss91255-docker/base/issues/42"
+    "https://github.com/ycpss91255-lab/base/issues/42"
   assert_success
 }
 

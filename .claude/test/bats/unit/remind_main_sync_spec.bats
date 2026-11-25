@@ -81,12 +81,12 @@ load '../lib/test_helper'
 # ---- with explicit -R / --repo ----
 
 @test "fires on gh pr merge with -R owner/repo" {
-  run "$(hook remind_main_sync.sh)" <<< '{"tool_input":{"command":"gh pr merge 89 -R ycpss91255-docker/docker_harness --squash"}}'
+  run "$(hook remind_main_sync.sh)" <<< '{"tool_input":{"command":"gh pr merge 89 -R ycpss91255-lab/docker_harness --squash"}}'
   assert_message_contains "PR merged"
 }
 
 @test "fires on gh pr merge with --repo owner/repo --auto" {
-  run "$(hook remind_main_sync.sh)" <<< '{"tool_input":{"command":"gh pr merge 89 --repo ycpss91255-docker/docker_harness --auto"}}'
+  run "$(hook remind_main_sync.sh)" <<< '{"tool_input":{"command":"gh pr merge 89 --repo ycpss91255-lab/docker_harness --auto"}}'
   assert_message_contains "Auto-merge queued"
 }
 
