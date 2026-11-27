@@ -56,15 +56,18 @@ project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 - **Line-ending rules: text files are LF in the repository and in every
-  checkout (closes #335, refs ycpss91255-lab/base#2246).** The repo had no
-  `.gitattributes`, so whether a checkout came out LF or CRLF depended on
-  each machine's `core.autocrlf`; a default Windows clone turned the hooks,
-  scripts and bats specs into CRLF files that cannot run in a Linux
-  container. The root `.gitattributes` now carries the org-wide managed
-  block (`* text=auto eol=lf`, `*.bat` / `*.cmd` as CRLF, common binary
-  extensions as `binary`), byte-identical to the other repos in the org.
-  No repo-specific exception is needed: the index held no CRLF file and no
-  binary file, and `git add --renormalize .` changed nothing.
+  fresh checkout (closes #335, refs ycpss91255-lab/base#2246).** The repo had
+  no `.gitattributes`, so whether a checkout came out LF or CRLF depended on
+  each machine's `core.autocrlf`: a clone with `core.autocrlf=true` (the
+  Windows default) checked 269 text files out as CRLF, the hooks, scripts
+  and bats specs among them. The root `.gitattributes` now carries the
+  org-wide managed block (`* text=auto eol=lf`, `*.bat` / `*.cmd` as CRLF,
+  common binary extensions as `binary`), byte-identical to the one merged
+  in `ycpss91255-lab/agent_harness`. No repo-specific exception is needed:
+  the index held no CRLF file and no binary file, and
+  `git add --renormalize .` changed nothing. A working tree that was
+  already checked out as CRLF keeps those files until they are checked out
+  again; a fresh clone gets LF.
 - **`ready-for-agent` now means something, at both ends (closes #294).**
   ADR-00000015 defines the label as an assertion that four things are
   present in the issue -- **Seams**, **First slice**, **Gate**, **Bound** --
