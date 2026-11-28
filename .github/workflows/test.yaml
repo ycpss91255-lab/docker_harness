@@ -2,6 +2,7 @@ name: CI
 
 on:
   pull_request:
+  merge_group:
   push:
     branches: [main]
 
@@ -42,3 +43,18 @@ jobs:
       # needs a step here as well.
       - name: Audit doc/test catalog drift
         run: ./ci.sh doc-count-check
+
+  # 單一聚合 check，供 main merge queue ruleset 作為 required check。
+  ci-rollup:
+    name: ci-rollup
+    if: always()
+    needs: [test]
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Require all jobs succeeded
+        run: |
+          case "${{ needs.test.result }}" in
+            success|skipped) ;;
+            *) echo "test job result: ${{ needs.test.result }}"; exit 1 ;;
+          esac
